@@ -3,14 +3,22 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Game extends Model
 {
     protected $fillable = [ 
-        'user_id', 'name', 'genre', 'publisher', 'release_date'
-    ]
+         'name', 'publisher', 'release_date'
+    ];
 
-    public function user(){ 
-        return $this->belongsTo(User::class); 
+    public function requirement(): HasOne { 
+        return $this->hasOne(Requirement::class, 'game_id'); 
+    }
+    
+
+    public function genres() { 
+        return $this->belongsToMany(Genre::class); 
     }
 }
