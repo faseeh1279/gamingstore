@@ -15,6 +15,7 @@
     </style>
 </head>
 <body>
+    <h2>You have logged In as {{ $user->name }}</h2>
     <div class="container" id="dashboard">
         <a href="{{ route('games.create') }}" style="" class="btn btn-primary">Add Game</a>
     </div>
@@ -34,7 +35,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($games as $game)
+                {{-- @foreach ($games as $game)
                 <tr>
                     <td>{{$game->id}}</td>
                     <td>{{$game->name}}</td>
@@ -44,16 +45,8 @@
                     <td>{{$game->requirement?->ram}}</td>
                     <td>{{$game->requirement?->storage}}</td>
                     <td>{{$game->requirement?->gpu}}</td>
-                    {{-- <td>
-                        <a href="" class="btn btn-warning">
-                            Update
-                        </a>
-                        <a href="" class="btn btn-danger">
-                            Delete
-                        </a>
-                    </td> --}}
                 </tr>
-                @endforeach
+                @endforeach --}}
             </tbody>
         </table>
     </div>

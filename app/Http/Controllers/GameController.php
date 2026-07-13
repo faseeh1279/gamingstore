@@ -5,6 +5,7 @@ use App\Http\Requests\CreateGameRequest;
 use App\Models\Game;
 use App\Services\GameService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 
 class GameController extends Controller
@@ -17,7 +18,8 @@ class GameController extends Controller
 
     public function index(){ 
         $games = $this->gameService->fetchGames(); 
-        return view('games.index', compact('games')); 
+        $user = Auth::user(); 
+        return view('games.index', compact('user')); 
     }   
 
     public function createGame(){ 
