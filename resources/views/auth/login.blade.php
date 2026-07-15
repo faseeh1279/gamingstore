@@ -1,8 +1,10 @@
-@extends('layouts.app')
+
+@extends('layouts.auth')
 
 @section('title', 'Login')
 
-@section('content')
+@section('content') 
+
 
 <div class="container mt-5" style="width:50%">
     <form action="{{ route('auth.loginStore') }}" method="POST">
@@ -64,4 +66,5 @@
     </form>
 </div>
 
-@endsection
+
+@endsection 
