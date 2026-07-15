@@ -10,8 +10,9 @@ Route::get('/', function () {
 });
 
 Route::get('auth/login', [AuthController::class, 'login'])->name('login'); 
-Route::get('auth/register', [AuthController::class, 'register'])->name('auth.register'); 
+Route::get('auth/register', [AuthController::class, 'register'])->name('register'); 
 Route::post('auth/store', [AuthController::class, 'store'])->name('auth.store'); 
+Route::post('auth/logout', [AuthController::class, 'logout'])->name('logout'); 
 Route::post('auth/login/store', [AuthController::class, 'loginStore'])->name('auth.loginStore'); 
 
 Route::middleware('auth')->group(function (){ 

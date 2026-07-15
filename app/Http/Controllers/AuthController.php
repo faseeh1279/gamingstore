@@ -16,6 +16,21 @@ class AuthController extends Controller
         return view ('auth.register'); 
     }
 
+    public function logout(Request $request){ 
+        // Log the user out
+        Auth::logout();
+
+        // Invalidate the current session
+        $request->session()->invalidate();
+
+        // Regenerate the CSRF token
+        $request->session()->regenerateToken();
+
+        // Redirect to the login page
+        return redirect()->route('login')
+            ->with('success', 'You have been logged out successfully.');
+    }
+
     public function loginStore(Request $request)
     {
         try {
@@ -62,7 +77,7 @@ class AuthController extends Controller
 
 
         return redirect()
-        ->route('auth.register')
+        ->route('register')
         ->with('success', 'Registration Successful'); 
     }
 }
