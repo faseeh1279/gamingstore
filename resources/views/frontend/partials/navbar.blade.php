@@ -23,43 +23,43 @@
             <ul class="navbar-nav mx-auto">
 
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('home') ? 'active fw-semibold' : '' }}"
+                    <a class="nav-link {{ request()->routeIs('index') ? 'active fw-semibold' : '' }}"
                        href="{{ route('index') }}">
                         Home
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link"
-                       href="#">
+                    <a class="nav-link {{ request()->routeIs('games.index') ? 'active fw-semibold' : '' }}"
+                       href="{{ route('games.index') }}">
                         Games
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link"
-                       href="#">
+                    <a class="nav-link {{ request()->routeIs('categories.index') ? 'active fw-semibold' : '' }}"
+                       href="{{ route('categories.index') }}">
                         Categories
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link"
-                       href="#">
+                    <a class="nav-link {{ request()->routeIs('news.index') ? 'active fw-semibold' : '' }}"
+                       href="{{ route('news.index') }}">
                         News
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link"
-                       href="#">
+                    <a class="nav-link {{ request()->routeIs('about') ? 'active fw-semibold' : '' }}"
+                       href="{{ route('about') }}">
                         About
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link"
-                       href="#">
+                    <a class="nav-link {{ request()->routeIs('contact') ? 'active fw-semibold' : '' }}"
+                       href="{{ route('contact') }}">
                         Contact
                     </a>
                 </li>
