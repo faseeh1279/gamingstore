@@ -11,6 +11,7 @@ class Gpu extends Model
 
     protected $fillable = [
         'manufacturer',
+        'score', 
         'model',
         'vram',
         'release_year',

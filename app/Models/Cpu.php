@@ -11,6 +11,7 @@ class Cpu extends Model
 
     protected $fillable = [
         'manufacturer',
+        'score', 
         'model',
         'cores',
         'threads',

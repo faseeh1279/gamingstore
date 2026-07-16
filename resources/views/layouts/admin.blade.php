@@ -69,6 +69,10 @@
         display: none;
     }
 
+    .sidebar.collapsed #gameLogo { 
+        display:none; 
+    }
+
 
     /* Menu */
 
@@ -154,16 +158,27 @@
     }
 
     .submenu-link {
-        display: block;
-        padding: 10px 55px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 20px 10px 30px;
         color: #adb5bd;
         text-decoration: none;
-        font-size: 14px;
+        transition: .2s;
+    }
+
+    .sidebar.collapsed .submenu span {
+    display: none;
     }
 
     .submenu-link:hover {
         color: white;
         background: #343a40;
+    }
+
+    .submenu-link i {
+        min-width: 20px;
+        text-align: center;
     }
 
     /* Main Content */
@@ -212,6 +227,22 @@
             width: 260px;
         }
     }
+
+    .menu-link.active {
+    background: #0d6efd;
+    color: #fff;
+    }
+
+    .submenu-link.active {
+        background: #0d6efd;
+        color: #fff;
+        border-radius: 6px;
+    }
+
+    .submenu-link.active i {
+        color: #fff;
+    }
+    
     </style>
 </head>
 <body>
@@ -236,6 +267,7 @@
     const mobileBtn = document.getElementById("mobileSidebarToggle");
     const overlay = document.getElementById("overlay");
     // Desktop Sidebar Collapse
+    // Desktop Sidebar Collapse
     if (collapseBtn) {
         collapseBtn.addEventListener("click", function () {
             sidebar.classList.toggle("collapsed");
@@ -243,6 +275,11 @@
 
             if (sidebar.classList.contains("collapsed")) {
                 localStorage.setItem("sidebar", "collapsed");
+
+                // Close all open submenus
+                document.querySelectorAll(".submenu.show").forEach(function (submenu) {
+                    bootstrap.Collapse.getOrCreateInstance(submenu).hide();
+                });
             } else {
                 localStorage.setItem("sidebar", "expanded");
             }
@@ -250,9 +287,14 @@
     }
     // Load Sidebar State
     const sidebarState = localStorage.getItem("sidebar");
+
     if (sidebarState === "collapsed") {
         sidebar.classList.add("collapsed");
         main.classList.add("expanded");
+
+        document.querySelectorAll(".submenu.show").forEach(function (submenu) {
+            bootstrap.Collapse.getOrCreateInstance(submenu).hide();
+        });
     }
     // Mobile Sidebar Open
     if (mobileBtn) {
