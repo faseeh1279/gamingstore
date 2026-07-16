@@ -9,46 +9,34 @@ use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
-use App\Models\MailSetting; 
+use App\Models\MailSetting;    
 
 class EmailNotification extends Mailable
 {
      use Queueable, SerializesModels;
 
-    /**
-     * Create a new message instance.
-     */
-    public MailSetting $mailSetting;
-    public string $name;
-    public string $email;
-    public string $mailSubject;
     public string $messageContent;
 
     public function __construct(
-        MailSetting $mailSetting, 
-        string $name, 
-        string $email, 
-        string $subject, 
-        string $messageContent)
-    {
-        $this->mailSetting = $mailSetting;
-        $this->name = $name;
-        $this->email = $email;
-        $this->mailSubject = $subject;
-        $this->messageContent = $messageContent;
-    }
+        string $messageContent
+        ){
+            $this->messageContent = $messageContent;
+        }
     public function build()
     {
-        return $this->subject('New Contact Form Submission: ' . $this->mailSubject)
-            ->from($this->mailSetting->from_address, $this->mailSetting->from_name)
+        return $this->subject('New Contact Form Submission: Subject')
+            // ->from(
+            //     config('mail.from.address'),
+            //     config('mail.from.name')
+            //     )
             ->markdown('notifications::email', [
                 'level' => 'info',
                 'greeting' => 'New Contact Form Submission',
                 'introLines' => [
-                    '**Name:** ' . $this->name,
-                    '**Email:** ' . $this->email,
-                    '**Subject:** ' . $this->mailSubject,
-                    '',
+                    // '**Name:** ' . config('mail.from.name'),
+                    // '**Email:** ' . config('mail.from.address'),
+                    // '**Subject:** ' .'Subject',
+                    // '',
                     '**Message:**',
                     $this->messageContent,
                 ],
@@ -57,33 +45,4 @@ class EmailNotification extends Mailable
                 ],
             ]);
     }
-    /**
-     * Get the message envelope.
-     */
-    // public function envelope(): Envelope
-    // {
-    //     return new Envelope(
-    //         subject: 'Notification Email',
-    //     );
-    // }
-
-    /**
-     * Get the message content definition.
-     */
-    // public function content(): Content
-    // {
-    //     return new Content(
-    //         view: 'view.name',
-    //     );
-    // }
-
-    /**
-     * Get the attachments for the message.
-     *
-     * @return array<int, Attachment>
-     */
-    // public function attachments(): array
-    // {
-    //     return [];
-    // }
 }
