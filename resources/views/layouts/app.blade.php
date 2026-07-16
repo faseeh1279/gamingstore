@@ -393,6 +393,10 @@ footer .btn{
     line-height:1.2;
 
 }
+
+#final-callback{
+    margin-bottom: -50px;
+}
     </style>
 
     @stack('styles')
