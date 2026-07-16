@@ -247,9 +247,9 @@
 </head>
 <body>
 <div class="wrapper">
-    @include('layouts.partials.sidebar')
+    @include('admin.partials.sidebar')
     <div class="main" id="main">
-        @include('layouts.partials.navbar')
+        @include('admin.partials.navbar')
         <div class="content p-4">
             @yield('content')
         </div>

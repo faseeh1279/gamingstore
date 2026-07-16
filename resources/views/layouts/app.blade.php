@@ -3,268 +3,419 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        @yield('title')
-    </title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>@yield('title', 'Can You Run It')</title>
+
+    {{-- Bootstrap --}}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    {{-- Bootstrap Icons --}}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    {{-- Google Font --}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
 
     <style>
-    .navbar-brand{
-        font-size:1.5rem;
-        font-weight:bold;
-    }
 
-    .nav-link{
-        color:white !important;
-        margin-right:10px;
-        transition:.3s;
-    }
+        body{
+            font-family:'Poppins',sans-serif;
+            background:#f5f7fb;
+        }
 
-    .nav-link:hover{
-        color:#ffd54f !important;
-    }
+        .section-padding{
+            padding:90px 0;
+        }
 
-    .dropdown-menu{
-        border:none;
-        border-radius:10px;
-        box-shadow:0 8px 20px rgba(0,0,0,.15);
-    }
+        .hero{
+            background:linear-gradient(135deg,#0d6efd,#1f2d5a);
+            color:#fff;
+        }
 
+        .hero-title{
+            font-size:3rem;
+            font-weight:700;
+        }
 
+        .hero-subtitle{
+            font-size:1.1rem;
+            opacity:.9;
+        }
 
-    .badge{
-        border-radius:20px;
-    }
+        .shadow-soft{
+            box-shadow:0 10px 30px rgba(0,0,0,.08);
+        }
+
+        .game-card{
+            transition:.3s;
+            border:0;
+            border-radius:16px;
+        }
+
+        .game-card:hover{
+            transform:translateY(-8px);
+            box-shadow:0 15px 40px rgba(0,0,0,.15);
+        }
+
+        footer{
+            background:#111827;
+            color:#fff;
+        }
+        .game-card{
+    border-radius:20px;
+    overflow:hidden;
+    transition:.35s ease;
+}
+
+.game-card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 20px 50px rgba(0,0,0,.15);
+}
+
+.game-card img{
+    height:320px;
+    object-fit:cover;
+}
+
+.game-card .btn{
+    border-radius:10px;
+}
+
+.shadow-soft{
+    box-shadow:0 10px 35px rgba(0,0,0,.08);
+}
+
+.section-padding{
+    padding:90px 0;
+}
+
+footer{
+    background:#111827;
+    color:#fff;
+}
+
+.footer-link{
+    color:#b9c2d0;
+    text-decoration:none;
+    transition:.3s;
+}
+
+.footer-link:hover{
+    color:#fff;
+    padding-left:5px;
+}
+
+footer .form-control{
+    border-radius:10px 0 0 10px;
+}
+
+footer .btn{
+    border-radius:0 10px 10px 0;
+}
+
+.game-card{
+    border:none;
+    border-radius:20px;
+    overflow:hidden;
+    transition:.35s ease;
+    background:#fff;
+}
+
+.game-card:hover{
+    transform:translateY(-12px);
+    box-shadow:0 25px 60px rgba(0,0,0,.18);
+}
+
+.game-card img{
+    height:340px;
+    object-fit:cover;
+}
+
+.game-card .badge{
+    font-size:.75rem;
+}
+
+.game-card .btn{
+    border-radius:10px;
+}
+
+.icon-box{
+    width:90px;
+    height:90px;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:2rem;
+}
+
+.shadow-soft{
+    transition:.35s;
+}
+
+.shadow-soft:hover{
+    transform:translateY(-10px);
+    box-shadow:0 20px 50px rgba(0,0,0,.15);
+}
+
+.category-card{
+    background:#fff;
+    border-radius:20px;
+    padding:35px 20px;
+    text-align:center;
+    transition:.35s;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+    height:100%;
+}
+
+.category-card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 20px 50px rgba(0,0,0,.15);
+}
+
+.category-icon{
+    width:90px;
+    height:90px;
+    margin:auto;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:#fff;
+    font-size:2rem;
+}
+
+.feature-card{
+    background:#fff;
+    border-radius:20px;
+    padding:35px;
+    height:100%;
+    text-align:center;
+    transition:.35s;
+    box-shadow:0 12px 35px rgba(0,0,0,.08);
+}
+
+.feature-card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 20px 50px rgba(0,0,0,.15);
+}
+
+.feature-icon{
+    width:90px;
+    height:90px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#fff;
+    font-size:2.2rem;
+    margin:auto;
+}
+
+.hardware-item{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:16px 0;
+
+    border-bottom:1px solid #ececec;
+
+    transition:.3s;
+}
+
+.hardware-item:last-child{
+
+    border-bottom:none;
+
+}
+
+.hardware-item:hover{
+
+    padding-left:12px;
+
+    background:#f8f9fa;
+
+    border-radius:10px;
+
+}
+
+.hardware-item .badge{
+
+    font-size:.9rem;
+    padding:8px 12px;
+
+}
+
+.form-control-lg,
+.form-select-lg{
+
+    border-radius:12px;
+
+}
+
+.bg-dark .card{
+
+    border-radius:24px;
+
+}
+
+.bg-dark .card-body{
+
+    background:#fff;
+
+    color:#212529;
+
+}
+
+.news-card{
+
+    border-radius:20px;
+    overflow:hidden;
+    transition:.35s;
+
+}
+
+.news-card:hover{
+
+    transform:translateY(-10px);
+    box-shadow:0 20px 50px rgba(0,0,0,.15);
+
+}
+
+.news-card img{
+
+    height:230px;
+    object-fit:cover;
+
+}
+
+.news-card h4{
+
+    line-height:1.4;
+
+}
+
+.testimonial-card{
+
+    border-radius:20px;
+    transition:.35s;
+
+}
+
+.testimonial-card:hover{
+
+    transform:translateY(-10px);
+
+    box-shadow:0 20px 50px rgba(0,0,0,.15);
+
+}
+
+.testimonial-card img{
+
+    object-fit:cover;
+
+}
+
+.accordion{
+
+    border-radius:20px;
+
+}
+
+.accordion-item{
+
+    border:none;
+
+}
+
+.accordion-button{
+
+    font-weight:600;
+    padding:22px;
+
+}
+
+.accordion-button:not(.collapsed){
+
+    background:#0d6efd;
+    color:#fff;
+
+}
+
+.accordion-button:focus{
+
+    box-shadow:none;
+
+}
+
+.bg-primary .form-control{
+
+    border-radius:14px;
+    border:none;
+
+}
+
+.bg-primary .btn{
+
+    border-radius:14px;
+
+}
+
+.bg-primary{
+
+    background:linear-gradient(135deg,#0d6efd,#3b82f6)!important;
+
+}
+
+.cta-section{
+
+    background:linear-gradient(135deg,#0f172a,#1e293b,#2563eb);
+    color:#fff;
+
+}
+
+.cta-section .btn{
+
+    min-width:220px;
+    border-radius:14px;
+
+}
+
+.cta-section h2{
+
+    line-height:1.2;
+
+}
     </style>
+
+    @stack('styles')
+
 </head>
+
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark shadow-sm"
-     style="background: linear-gradient(90deg, #0d6efd, #4f46e5);">
 
-    <div class="container">
+    @include('frontend.partials.admin-bar')
 
-        <!-- Logo / Brand -->
-        <a class="navbar-brand fw-bold" href="#">
-            🎮 GameStore
-        </a>
+    @include('frontend.partials.navbar')
 
-        <!-- Mobile Toggle -->
-        <button class="navbar-toggler border-0"
-                type="button"
-                data-toggle="collapse"
-                data-target="#navbarContent"
-                aria-controls="navbarContent"
-                aria-expanded="false"
-                aria-label="Toggle navigation">
+    <main>
 
-            <span class="navbar-toggler-icon"></span>
+        @yield('content')
 
-        </button>
+    </main>
 
-        <div class="collapse navbar-collapse" id="navbarContent">
+    @include('frontend.partials.footer')
 
-            <!-- Left Side -->
-            <ul class="navbar-nav mr-auto">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">
-                        Home
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        Games
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        Categories
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        Orders
-                    </a>
-                </li>
-
-                <li class="nav-item dropdown">
-
-                    <a class="nav-link dropdown-toggle"
-                       href="#"
-                       id="navbarDropdown"
-                       role="button"
-                       data-toggle="dropdown">
-
-                        More
-
-                    </a>
-
-                    <div class="dropdown-menu">
-
-                        <a class="dropdown-item" href="#">
-                            Settings
-                        </a>
-
-                        <a class="dropdown-item" href="#">
-                            Profile
-                        </a>
-
-                        <div class="dropdown-divider"></div>
-
-                        <a class="dropdown-item" href="#">
-                            Contact Us
-                        </a>
-
-                    </div>
-
-                </li>
-
-            </ul>
-
-            <!-- Right Side -->
-            <ul class="navbar-nav align-items-lg-center">
-
-                <!-- Branch 
-                    <li class="nav-item mr-lg-3 my-2 my-lg-0">
-                        
-                        <span class="badge badge-light px-3 py-2"
-                        style="font-size:15px;">
-                        
-                        📍 Branch:
-                        <strong>Karachi</strong>
-                        
-                    </span>
-                    
-                </li>
-            -->
-
-                <!-- Search -->
-                <li class="nav-item mr-lg-3">
-
-                    <form class="form-inline">
-
-                        <input class="form-control mr-2"
-                               type="search"
-                               style="border-radius: 25px;"
-                               placeholder="Search games">
-
-                        <button class="btn btn-light"  style="border-radius: 30px;">
-                            Search
-                        </button>
-
-                    </form>
-
-                </li>
-
-                <!-- Guest Mode Buttons -->
-                @guest
-                    <li class="nav-item">
-
-                        <a href="{{ route('login') }}"
-                        class="btn btn-outline-light mr-2"  style="border-radius: 30px;">
-                            Login
-                        </a>
-
-                    </li>
-
-                    <li class="nav-item">
-
-                        <a href="{{ route('register') }}"
-                        class="btn btn-warning"  style="border-radius: 30px;">
-                            Register
-                        </a>
-
-                    </li>
-
-                @endguest
-
-                @auth
-
-<li class="nav-item dropdown">
-
-    <a class="nav-link dropdown-toggle d-flex align-items-center"
-       href="#"
-       id="userDropdown"
-       role="button"
-       data-toggle="dropdown"
-       aria-haspopup="true"
-       aria-expanded="false">
-
-        <div class="rounded-circle bg-warning text-dark d-flex justify-content-center align-items-center mr-2"
-             style="width:38px;height:38px;font-weight:bold;">
-
-            {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
-
-        </div>
-
-        <span class="font-weight-bold text-white">
-
-            {{ Auth::user()->name }}
-
-        </span>
-
-    </a>
-
-    <div class="dropdown-menu dropdown-menu-right">
-
-        <h6 class="dropdown-header">
-
-            Signed in as
-
-            <br>
-
-            <strong>{{ Auth::user()->email }}</strong>
-
-        </h6>
-
-        <div class="dropdown-divider"></div>
-
-        <a class="dropdown-item" href="#">
-            <i class="mr-2">👤</i>
-            My Profile
-        </a>
-
-        <a class="dropdown-item" href="#">
-            <i class="mr-2">🔒</i>
-            Change Password
-        </a>
-
-        <div class="dropdown-divider"></div>
-
-        <form action="{{ route('logout') }}" method="POST">
-
-            @csrf
-            <button type="submit" class="dropdown-item text-danger">
-
-                <i class="mr-2">🚪</i>
-                Logout
-
-            </button>
-
-        </form>
-
-    </div>
-
-</li>
-
-@endauth
-            </ul>
-
-        </div>
-
-    </div>
-
-</nav>
-    
-    @yield('content')
-
+    @stack('scripts')
 
 </body>
 </html>
-
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
