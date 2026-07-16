@@ -1,7 +1,7 @@
 <aside id="sidebar" class="sidebar">
     <!-- Sidebar Header -->
     <div class="sidebar-header">
-        <a href="{{ route('admin.dashboard') }}" class="brand">
+        <a href="{{ route('admin.dashboard.index') }}" class="brand">
             <i class="bi bi-controller"></i>
 
             <span class="brand-text">
@@ -18,7 +18,7 @@
     <ul class="sidebar-menu">
         <!-- Dashboard -->
         <li class="menu-item">
-            <a href="{{ route('admin.dashboard') }}" class="menu-link active">
+            <a href="{{ route('admin.dashboard.index') }}" class="menu-link active">
                 <i class="bi bi-speedometer2"></i>
 
                 <span>
@@ -31,7 +31,6 @@
         <li class="menu-item">
             <a href="#gamesMenu" class="menu-link collapsed" data-bs-toggle="collapse">
                 <i class="bi bi-controller"></i>
-
                 <span>
                     Games
                 </span>
@@ -41,19 +40,19 @@
 
             <ul id="gamesMenu" class="collapse submenu">
                 <li>
-                    <a href="#" class="submenu-link">
+                    <a href="{{ route('admin.games.index') }}" class="submenu-link">
                         All Games
                     </a>
                 </li>
 
                 <li>
-                    <a href="#" class="submenu-link">
+                    <a href="{{ route('admin.games.create') }}" class="submenu-link">
                         Add Game
                     </a>
                 </li>
 
                 <li>
-                    <a href="#" class="submenu-link">
+                    <a href="{{ route('admin.requirements.index') }}" class="submenu-link">
                         Requirements
                     </a>
                 </li>
