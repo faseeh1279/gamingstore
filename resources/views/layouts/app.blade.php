@@ -397,6 +397,11 @@ footer .btn{
 #final-callback{
     margin-bottom: -50px;
 }
+
+.admin-top-bar {
+            background-color: #1e293b;
+            border-bottom: 1px solid #334155;
+}
     </style>
 
     @stack('styles')
@@ -407,6 +412,21 @@ footer .btn{
 
     @include('frontend.partials.admin-bar')
 
+    {{-- @can('is-admin') --}}
+        <div class="admin-top-bar py-2 px-3 shadow-sm">
+            <div class="container d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center text-white-50 small">
+                    <span class="badge bg-danger text-uppercase font-monospace me-2"
+                        style="font-size: 0.75rem; letter-spacing: 0.05em;">Admin Mode</span>
+                    <span class="d-none d-sm-inline">You are logged in as an administrator.</span>
+                </div>
+                <a class="btn btn-sm btn-outline-warning rounded-pill py-1 px-3 fw-semibold text-decoration-none"
+                    href="{{ route('admin.dashboard.index') }}">
+                    <i class="bi bi-speedometer2 me-1"></i> Admin Panel
+                </a>
+            </div>
+        </div>
+    {{-- @endcan --}}
     @include('frontend.partials.navbar')
 
     <main>

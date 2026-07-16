@@ -1,11 +1,11 @@
 <aside id="sidebar" class="sidebar">
     <!-- Sidebar Header -->
     <div class="sidebar-header">
-        <a href="{{ route('admin.dashboard.index') }}" class="brand">
+        <a href="{{ route('index') }}" class="brand">
             <i class="bi bi-controller" id="gameLogo"></i>
 
             <span class="brand-text">
-                GameStore
+                    GameStore
             </span>
         </a>
 
