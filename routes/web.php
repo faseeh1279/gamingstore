@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GameController;
-use App\Http\Controllers\WebHookController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -15,6 +14,11 @@ Route::post('auth/store', [AuthController::class, 'store'])->name('auth.store');
 Route::post('auth/logout', [AuthController::class, 'logout'])->name('logout'); 
 Route::post('auth/login/store', [AuthController::class, 'loginStore'])->name('auth.loginStore'); 
 
+Route::get('admin/dashboard', [GameController::class, 'dashboard'])->name('admin.dashboard'); 
+
+
+Route::get('/admin/games', [GameController::class, 'index'])->name('admin.games.index'); 
+
 Route::middleware('auth')->group(function (){ 
     Route::get('/game', [GameController::class, 'index'])->name('games.index'); 
     
@@ -22,6 +26,7 @@ Route::middleware('auth')->group(function (){
     
     Route::get('/game/create', [GameController::class, 'createGame'])->name('games.create'); 
 }); 
+
 
 
 
