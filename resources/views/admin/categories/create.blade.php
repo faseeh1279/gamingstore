@@ -1,188 +1,243 @@
 @extends('layouts.admin')
 
-@section('title', 'Add CPU')
-@section('page-title', 'Add CPU')
+@section('title', 'Add Category')
 
 @section('content')
 
-<div class="container-fluid">
+<div class="container-fluid py-4">
 
-    <div class="card shadow-sm border-0">
-
-        <div class="card-header bg-white d-flex justify-content-between align-items-center">
-            <h5 class="mb-0">Add New CPU</h5>
-
-            <a href="#" class="btn btn-outline-secondary">
-                <i class="bi bi-arrow-left me-1"></i>
-                Back
-            </a>
+    {{-- Page Header --}}
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="fw-bold mb-1">Add New Category</h2>
+            <p class="text-muted mb-0">
+                Create a new game category that can be assigned to games.
+            </p>
         </div>
 
-        <div class="card-body">
-
-            <form action="#" method="POST">
-                @csrf
-
-                <div class="row g-3">
-
-                    <div class="col-md-6">
-                        <label class="form-label">
-                            Manufacturer <span class="text-danger">*</span>
-                        </label>
-
-                        <select
-                            name="manufacturer"
-                            class="form-select"
-                            required>
-
-                            <option value="">Select Manufacturer</option>
-                            <option value="Intel">Intel</option>
-                            <option value="AMD">AMD</option>
-                        </select>
-                    </div>
-
-                    <div class="col-md-6">
-                        <label class="form-label">
-                            CPU Model <span class="text-danger">*</span>
-                        </label>
-
-                        <input
-                            type="text"
-                            name="model"
-                            class="form-control"
-                            placeholder="Intel Core i7-12700K"
-                            required>
-                    </div>
-
-                    <div class="col-md-4">
-                        <label class="form-label">
-                            Cores
-                        </label>
-
-                        <input
-                            type="number"
-                            name="cores"
-                            class="form-control"
-                            placeholder="8">
-                    </div>
-
-                    <div class="col-md-4">
-                        <label class="form-label">
-                            Threads
-                        </label>
-
-                        <input
-                            type="number"
-                            name="threads"
-                            class="form-control"
-                            placeholder="16">
-                    </div>
-
-                    <div class="col-md-4">
-                        <label class="form-label">
-                            Performance Score <span class="text-danger">*</span>
-                        </label>
-
-                        <input
-                            type="number"
-                            name="score"
-                            class="form-control"
-                            placeholder="29500"
-                            required>
-
-                        <small class="text-muted">
-                            Used for compatibility comparison.
-                        </small>
-                    </div>
-
-                    <div class="col-md-6">
-                        <label class="form-label">
-                            Base Clock (GHz)
-                        </label>
-
-                        <input
-                            type="number"
-                            step="0.1"
-                            name="base_clock"
-                            class="form-control"
-                            placeholder="3.6">
-                    </div>
-
-                    <div class="col-md-6">
-                        <label class="form-label">
-                            Boost Clock (GHz)
-                        </label>
-
-                        <input
-                            type="number"
-                            step="0.1"
-                            name="boost_clock"
-                            class="form-control"
-                            placeholder="5.0">
-                    </div>
-
-                    <div class="col-md-6">
-                        <label class="form-label">
-                            Release Year
-                        </label>
-
-                        <input
-                            type="number"
-                            name="release_year"
-                            class="form-control"
-                            placeholder="2022"
-                            min="1990"
-                            max="{{ date('Y') + 1 }}">
-                    </div>
-
-                    <div class="col-md-6">
-                        <label class="form-label">
-                            Status
-                        </label>
-
-                        <select
-                            name="is_active"
-                            class="form-select">
-
-                            <option value="1" selected>
-                                Active
-                            </option>
-
-                            <option value="0">
-                                Inactive
-                            </option>
-
-                        </select>
-                    </div>
-
-                </div>
-
-                <div class="mt-4">
-
-                    <button
-                        type="submit"
-                        class="btn btn-primary">
-
-                        <i class="bi bi-check-circle me-1"></i>
-                        Save CPU
-
-                    </button>
-
-                    <a
-                        href="#"
-                        class="btn btn-secondary">
-
-                        Cancel
-
-                    </a>
-
-                </div>
-
-            </form>
-
-        </div>
-
+        <a href="{{ route('admin.categories.index') }}" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left me-1"></i>
+            Back to Categories
+        </a>
     </div>
+
+    <form action="#" method="POST">
+
+        @csrf
+
+        <div class="row">
+
+            {{-- Left Column --}}
+            <div class="col-lg-8">
+
+                <div class="card shadow-sm border-0 mb-4">
+
+                    <div class="card-header bg-white">
+                        <h5 class="mb-0 fw-semibold">
+                            General Information
+                        </h5>
+                    </div>
+
+                    <div class="card-body">
+
+                        {{-- Category Name --}}
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold">
+                                Category Name
+                                <span class="text-danger">*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                name="name"
+                                class="form-control"
+                                placeholder="Example: Action"
+                                value="{{ old('name') }}">
+
+                            <div class="form-text">
+                                Enter a unique category name.
+                            </div>
+                        </div>
+
+                        {{-- Slug --}}
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold">
+                                Slug
+                                <span class="text-danger">*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                name="slug"
+                                class="form-control"
+                                placeholder="example: action"
+                                value="{{ old('slug') }}">
+
+                            <div class="form-text">
+                                Used in URLs. Example: action-games
+                            </div>
+                        </div>
+
+                        {{-- Icon --}}
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold">
+                                Icon
+                            </label>
+
+                            <input
+                                type="text"
+                                name="icon"
+                                class="form-control"
+                                placeholder="Example: bi-controller"
+                                value="{{ old('icon') }}">
+
+                            <div class="form-text">
+                                Bootstrap Icon class (optional).
+                            </div>
+                        </div>
+
+                        {{-- Description --}}
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold">
+                                Description
+                            </label>
+
+                            <textarea
+                                name="description"
+                                rows="5"
+                                class="form-control"
+                                placeholder="Write a short description...">{{ old('description') }}</textarea>
+
+                            <div class="form-text">
+                                Brief description of this category.
+                            </div>
+                        </div>
+
+                        {{-- Status --}}
+                        <div>
+                            <label class="form-label fw-semibold d-block">
+                                Status
+                            </label>
+
+                            <div class="form-check form-switch">
+
+                                <input
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    name="is_active"
+                                    value="1"
+                                    checked>
+
+                                <label class="form-check-label">
+                                    Active
+                                </label>
+
+                            </div>
+
+                            <div class="form-text">
+                                Inactive categories won't be visible on the website.
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {{-- Right Column --}}
+            <div class="col-lg-4">
+
+                {{-- Preview --}}
+                <div class="card shadow-sm border-0 mb-4">
+
+                    <div class="card-header bg-white">
+                        <h5 class="mb-0 fw-semibold">
+                            Category Preview
+                        </h5>
+                    </div>
+
+                    <div class="card-body text-center">
+
+                        <div class="display-3 mb-3 text-primary">
+                            <i class="bi bi-controller"></i>
+                        </div>
+
+                        <h5 class="fw-bold">
+                            Action
+                        </h5>
+
+                        <p class="text-muted small mb-4">
+                            Fast-paced games focused on combat and adventure.
+                        </p>
+
+                        <span class="badge bg-success px-3 py-2">
+                            Active
+                        </span>
+
+                    </div>
+
+                </div>
+
+                {{-- Guidelines --}}
+                <div class="card shadow-sm border-0">
+
+                    <div class="card-header bg-white">
+                        <h5 class="mb-0 fw-semibold">
+                            Guidelines
+                        </h5>
+                    </div>
+
+                    <div class="card-body">
+
+                        <ul class="list-unstyled mb-0">
+
+                            <li class="mb-3">
+                                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                Use unique category names.
+                            </li>
+
+                            <li class="mb-3">
+                                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                Keep the slug lowercase.
+                            </li>
+
+                            <li class="mb-3">
+                                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                Choose a meaningful icon.
+                            </li>
+
+                            <li>
+                                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                Keep descriptions short and informative.
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {{-- Buttons --}}
+        <div class="d-flex justify-content-end gap-2 mt-4">
+
+            <a href="{{ route('admin.categories.index') }}" class="btn btn-light">
+                Cancel
+            </a>
+
+            <button type="submit" class="btn btn-primary">
+                <i class="bi bi-check-lg me-1"></i>
+                Save Category
+            </button>
+
+        </div>
+
+    </form>
 
 </div>
 
