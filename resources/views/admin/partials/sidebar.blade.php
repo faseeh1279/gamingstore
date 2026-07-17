@@ -54,40 +54,104 @@
                     </a>
                 </li>
 
-                {{-- <li>
-                    <a href="{{ route('admin.requirements.index') }}" class="submenu-link">
-                        <i class="bi bi-controller"></i>
-                        <span>Requirements</span>
-                    </a>
-                </li> --}}
             </ul>
         </li>
 
         <!-- Categories -->
         <li class="menu-item">
-            <a href="{{ route('admin.categories.index') }}"
-            class="menu-link {{ request()->routeIs('admin.categories.*') ? 'active' : '' }}">
-                <i class="bi bi-grid"></i>
-                <span>Categories</span>
-            </a>
+            <a href="#categoriesMenu"
+                class="menu-link {{ request()->routeIs('admin.categories.*') ? '' : 'collapsed' }}"
+                data-bs-toggle="collapse">
+
+                    <i class="bi bi-grid"></i>
+
+                    <span>Categories</span>
+
+                    <i class="bi bi-chevron-down arrow"></i>
+
+                </a>
+
+            <ul id="categoriesMenu"
+                class="collapse {{ request()->routeIs('admin.categories.*') ? 'show' : '' }} submenu">
+                <li>
+                    <a href="{{ route('admin.categories.index') }}" class="submenu-link {{ request()->routeIs('admin.categories.index') ? 'active' : '' }}">
+                        <i class="bi bi-controller"></i>
+                        <span> All Categories</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="{{ route('admin.categories.create') }}" class="submenu-link {{ request()->routeIs('admin.categories.create') ? 'active' : '' }}">
+                        <i class="bi bi-plus-circle-fill"></i>
+                        <span> Add Category</span>
+                    </a>
+                </li>
+            </ul>
         </li>
 
         <!-- Developers -->
         <li class="menu-item">
-            <a href="{{ route('admin.developer.index') }}"
-            class="menu-link {{ request()->routeIs('admin.developer.*') ? 'active' : '' }}">
-                <i class="bi bi-building"></i>
-                <span>Developers</span>
-            </a>
+
+            <a href="#developersMenu"
+                class="menu-link {{ request()->routeIs('admin.developers.*') ? '' : 'collapsed' }}"
+                data-bs-toggle="collapse">
+
+                    <i class="bi bi-grid"></i>
+
+                    <span>Developers</span>
+
+                    <i class="bi bi-chevron-down arrow"></i>
+
+                </a>
+
+            <ul id="developersMenu"
+                class="collapse {{ request()->routeIs('admin.developer.*') ? 'show' : '' }} submenu">
+                <li>
+                    <a href="{{ route('admin.developer.index') }}" class="submenu-link {{ request()->routeIs('admin.developer.index') ? 'active' : '' }}">
+                        <i class="bi bi-controller"></i>
+                        <span> All Developers</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="{{ route('admin.developer.create') }}" class="submenu-link {{ request()->routeIs('admin.developer.create') ? 'active' : '' }}">
+                        <i class="bi bi-plus-circle-fill"></i>
+                        <span> Add Developer</span>
+                    </a>
+                </li>
+            </ul>
         </li>
 
         <!-- Publishers -->
         <li class="menu-item">
-            <a href="{{ route('admin.publisher.index') }}"
-                class="menu-link {{ request()->routeIs('admin.publisher.*') ? 'active' : '' }}">
-                    <i class="bi bi-box-seam"></i>
+                <a href="#publisherMenu"
+                class="menu-link {{ request()->routeIs('admin.publisher.*') ? '' : 'collapsed' }}"
+                data-bs-toggle="collapse">
+
+                    <i class="bi bi-grid"></i>
+
                     <span>Publishers</span>
+
+                    <i class="bi bi-chevron-down arrow"></i>
+
                 </a>
+
+            <ul id="publisherMenu"
+                class="collapse {{ request()->routeIs('admin.publisher.*') ? 'show' : '' }} submenu">
+                <li>
+                    <a href="{{ route('admin.publisher.index') }}" class="submenu-link {{ request()->routeIs('admin.publisher.index') ? 'active' : '' }}">
+                        <i class="bi bi-controller"></i>
+                        <span> All Publishers</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="{{ route('admin.publisher.create') }}" class="submenu-link {{ request()->routeIs('admin.publisher.create') ? 'active' : '' }}">
+                        <i class="bi bi-plus-circle-fill"></i>
+                        <span> Add Publisher</span>
+                    </a>
+                </li>
+            </ul>
         </li>
 
         <!-- Hardware -->

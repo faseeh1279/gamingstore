@@ -9,7 +9,7 @@ use App\Models\User;
 
 class AuthController extends Controller
 {
-   public function login(Request $request){    
+   public function login(){    
         return view('auth.login'); 
     }
 
@@ -28,7 +28,7 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
 
         // Redirect to the login page
-        return redirect()->route('login')
+        return redirect()->route('index')
             ->with('success', 'You have been logged out successfully.');
     }
 

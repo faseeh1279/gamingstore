@@ -152,3 +152,13 @@ Route::prefix('admin')->group(function(){
 }); 
 
 
+
+
+// Route::get('/gate-test', function () {
+//     return [
+//         'authenticated' => auth()->check(),
+//         'role' => auth()->user()?->role,
+//         'can' => auth()->user()?->can('is-admin'),
+//         'allows' => Illuminate\Support\Facades\Gate::allows('is-admin'),
+//     ];
+// })->middleware('auth');

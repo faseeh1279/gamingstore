@@ -4,7 +4,7 @@
         {{-- Logo --}}
         <a class="navbar-brand fw-bold fs-3" href="{{ route('index') }}">
             <i class="bi bi-controller me-2 text-primary"></i>
-            CanYouRunIt
+            {{ config('app.name') }}
         </a>
 
         {{-- Mobile Toggle --}}

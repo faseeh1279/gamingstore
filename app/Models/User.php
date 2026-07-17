@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enum\UserRole;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
@@ -24,14 +25,17 @@ class User extends Authenticatable
      */
 
     public $fillable = [
-        'name', 'email' , 'password'
+        'name', 'email' , 'password', 'role'
     ];
+
+    
     
     protected function casts(): array
     {
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'role' => UserRole::class
         ];
     }
 

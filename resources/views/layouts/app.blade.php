@@ -413,6 +413,7 @@ footer .btn{
     @include('frontend.partials.admin-bar')
 
     {{-- @can('is-admin') --}}
+    @if(Gate::allows('is-admin'))
         <div class="admin-top-bar py-2 px-3 shadow-sm">
             <div class="container d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center text-white-50 small">
@@ -426,7 +427,11 @@ footer .btn{
                 </a>
             </div>
         </div>
+    @endif
     {{-- @endcan --}}
+    {{-- {{ dd(auth()->user()->role) }} --}}
+    {{-- {{ Gate::allows('is-admin') ? 'YES' : 'NO' }} --}}
+    {{-- {{ auth()->user()->can('is-admin')}} --}}
     @include('frontend.partials.navbar')
 
     <main>
