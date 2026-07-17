@@ -6,254 +6,206 @@
 
 <style>
     :root {
-        --hud-bg: #12141c;
-        --hud-panel: #191d29;
-        --hud-panel-edge: #262b3a;
-        --hud-amber: #f2a93b;
-        --hud-teal: #35c4b0;
-        --hud-text: #e8e9ee;
-        --hud-muted: #7d8296;
-        --hud-danger: #ff5d6c;
+        --brand-ink: #1c1f26;
+        --brand-indigo: #4338ca;
+        --brand-indigo-light: #6d5ef8;
+        --brand-mist: #f6f7fb;
     }
 
-    .hud-shell {
+    .auth-shell {
         min-height: 100vh;
-        background:
-            radial-gradient(circle at 15% 20%, rgba(242, 169, 59, 0.08), transparent 40%),
-            radial-gradient(circle at 85% 80%, rgba(53, 196, 176, 0.08), transparent 40%),
-            var(--hud-bg);
+        background: var(--brand-mist);
         display: flex;
         align-items: center;
-        color: var(--hud-text);
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     }
 
-    .hud-panel {
-        background: var(--hud-panel);
-        border: 1px solid var(--hud-panel-edge);
-        clip-path: polygon(0 0, 100% 0, 100% calc(100% - 24px), calc(100% - 24px) 100%, 0 100%);
-        position: relative;
+    .auth-card {
+        border: none;
+        border-radius: 1.25rem;
         overflow: hidden;
+        box-shadow: 0 1.5rem 3rem rgba(28, 31, 38, 0.08);
     }
 
-    .hud-panel::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 3px;
-        background: linear-gradient(90deg, var(--hud-amber) 0%, var(--hud-teal) 100%);
+    .auth-side {
+        background: linear-gradient(160deg, var(--brand-indigo) 0%, var(--brand-indigo-light) 100%);
+        color: #fff;
+        padding: 3rem 2.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 100%;
     }
 
-    .hud-eyebrow {
-        font-family: "Courier New", Courier, monospace;
-        letter-spacing: 0.18em;
-        font-size: 0.72rem;
-        color: var(--hud-teal);
-        text-transform: uppercase;
+    .auth-side h3 {
+        font-weight: 700;
+        letter-spacing: -0.02em;
     }
 
-    .hud-title {
-        font-weight: 800;
-        letter-spacing: -0.01em;
+    .auth-side .brand-mark {
+        width: 44px;
+        height: 44px;
+        border-radius: 0.75rem;
+        background: rgba(255, 255, 255, 0.15);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 1.1rem;
+    }
+
+    .auth-form-col {
+        padding: 3rem 2.75rem;
+    }
+
+    .auth-form-col h2 {
+        font-weight: 700;
+        color: var(--brand-ink);
+        letter-spacing: -0.02em;
+    }
+
+    .auth-form-col .subtitle {
+        color: #6b7280;
+    }
+
+    .form-control {
+        padding: 0.75rem 1rem;
+        border-radius: 0.6rem;
+        border: 1px solid #e2e4ea;
+    }
+
+    .form-control:focus {
+        border-color: var(--brand-indigo-light);
+        box-shadow: 0 0 0 0.2rem rgba(109, 94, 248, 0.15);
+    }
+
+    .form-label {
+        font-weight: 600;
+        font-size: 0.9rem;
+        color: var(--brand-ink);
+    }
+
+    .btn-brand {
+        background: var(--brand-indigo);
+        border: none;
+        color: #fff;
+        padding: 0.75rem 1rem;
+        border-radius: 0.6rem;
+        font-weight: 600;
+        transition: background 0.15s ease;
+    }
+
+    .btn-brand:hover {
+        background: #372ea8;
         color: #fff;
     }
 
-    .hud-subtitle {
-        color: var(--hud-muted);
-        font-size: 0.92rem;
-    }
-
-    .spec-row {
-        display: flex;
-        align-items: center;
-        gap: 0.6rem;
-        font-family: "Courier New", Courier, monospace;
-        font-size: 0.75rem;
-        color: var(--hud-muted);
-    }
-
-    .spec-bar {
-        flex: 1;
-        height: 4px;
-        background: #262b3a;
-        border-radius: 2px;
-        overflow: hidden;
-    }
-
-    .spec-bar > span {
-        display: block;
-        height: 100%;
-        border-radius: 2px;
-    }
-
-    .hud-form-label {
-        font-family: "Courier New", Courier, monospace;
-        font-size: 0.72rem;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        color: var(--hud-muted);
-        margin-bottom: 0.35rem;
-    }
-
-    .hud-shell .form-control {
-        background: #0f111a;
-        border: 1px solid var(--hud-panel-edge);
-        color: var(--hud-text);
-        border-radius: 0.4rem;
-        padding: 0.7rem 0.9rem;
-    }
-
-    .hud-shell .form-control::placeholder {
-        color: #4b5165;
-    }
-
-    .hud-shell .form-control:focus {
-        background: #0f111a;
-        color: var(--hud-text);
-        border-color: var(--hud-amber);
-        box-shadow: 0 0 0 0.2rem rgba(242, 169, 59, 0.15);
-    }
-
-    .hud-shell .invalid-feedback {
-        color: var(--hud-danger);
-        font-family: "Courier New", Courier, monospace;
-        font-size: 0.78rem;
-    }
-
-    .btn-hud {
-        background: var(--hud-amber);
-        border: none;
-        color: #191300;
-        font-weight: 700;
-        letter-spacing: 0.03em;
-        padding: 0.75rem 1rem;
-        border-radius: 0.4rem;
-        transition: background 0.15s ease, transform 0.1s ease;
-        clip-path: polygon(14px 0, 100% 0, 100% 100%, 0 100%, 0 14px);
-    }
-
-    .btn-hud:hover {
-        background: #ffbe57;
-        color: #191300;
-    }
-
-    .btn-hud:active {
-        transform: scale(0.99);
-    }
-
-    .hud-alert-success {
-        background: rgba(53, 196, 176, 0.12);
-        border: 1px solid rgba(53, 196, 176, 0.4);
-        color: var(--hud-teal);
-        border-radius: 0.4rem;
-        padding: 0.65rem 0.9rem;
-        font-size: 0.9rem;
-    }
-
-    .hud-login-link {
-        color: var(--hud-teal);
-        text-decoration: none;
-        font-size: 0.88rem;
-    }
-
-    .hud-login-link:hover {
-        color: #6fe0d0;
+    .divider-text {
+        color: #9ca3af;
+        font-size: 0.85rem;
     }
 </style>
 
-<div class="hud-shell">
+<div class="auth-shell">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-lg-7 col-xl-6">
+            <div class="col-lg-9 col-xl-8">
+                <div class="card auth-card">
+                    <div class="row g-0">
 
-                <div class="hud-panel p-4 p-md-5">
-
-                    {{-- Fake live spec readout - sets the "can you run it" tone --}}
-                    <div class="d-flex justify-content-between align-items-start mb-4">
-                        <div>
-                            <div class="hud-eyebrow mb-1">New player &bull; system scan ready</div>
-                            <h2 class="hud-title mb-0">Create your account</h2>
-                            <p class="hud-subtitle mb-0">Register to check what your rig can run.</p>
-                        </div>
-                        <div style="min-width: 140px;" class="d-none d-sm-block">
-                            <div class="spec-row mb-1">
-                                <span>GPU</span>
-                                <div class="spec-bar"><span style="width:82%; background: var(--hud-teal);"></span></div>
-                            </div>
-                            <div class="spec-row mb-1">
-                                <span>CPU</span>
-                                <div class="spec-bar"><span style="width:64%; background: var(--hud-amber);"></span></div>
-                            </div>
-                            <div class="spec-row">
-                                <span>RAM</span>
-                                <div class="spec-bar"><span style="width:90%; background: var(--hud-teal);"></span></div>
+                        {{-- Left brand panel --}}
+                        <div class="col-md-5 d-none d-md-block">
+                            <div class="auth-side">
+                                <div>
+                                    <div class="brand-mark mb-4">A</div>
+                                    <h3 class="mb-2">Welcome back</h3>
+                                    <p class="mb-0" style="color: rgba(255,255,255,0.85);">
+                                        Sign in to pick up right where you left off.
+                                    </p>
+                                </div>
+                                <p class="mb-0 small" style="color: rgba(255,255,255,0.6);">
+                                    &copy; {{ date('Y') }} Your Company
+                                </p>
                             </div>
                         </div>
+
+                        {{-- Right form panel --}}
+                        <div class="col-md-7">
+                            <div class="auth-form-col">
+
+                                @if(session('success'))
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                        {{ session('success') }}
+                                        <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                @endif
+
+                                @if(session('error'))
+                                    <div class="alert alert-danger">
+                                        {{ session('error') }}
+                                    </div>
+                                @endif
+
+                                <h2 class="mb-1">Register Now</h2>
+                                <p class="subtitle mb-4">Enter your details to access your account.</p>
+
+                                <form action="{{ route('auth.loginStore') }}" method="POST" novalidate>
+                                    @csrf
+
+                                    <div class="mb-3">
+                                        <label class="form-label" for="email">Email</label>
+                                        <input
+                                            type="email"
+                                            id="email"
+                                            class="form-control @error('email') is-invalid @enderror"
+                                            name="email"
+                                            placeholder="you@example.com"
+                                            value="{{ old('email') }}">
+
+                                        @error('email')
+                                            <div class="invalid-feedback d-block">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="mb-2">
+                                        <label class="form-label" for="password">Password</label>
+                                        <input
+                                            type="password"
+                                            id="password"
+                                            class="form-control @error('password') is-invalid @enderror"
+                                            name="password"
+                                            placeholder="Enter your password">
+
+                                        @error('password')
+                                            <div class="invalid-feedback d-block">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="d-flex justify-content-between align-items-center mb-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="remember" id="remember">
+                                            <label class="form-check-label small" for="remember">Remember me</label>
+                                        </div>
+                                        <a href="#" class="small text-decoration-none" style="color: var(--brand-indigo);">Forgot password?</a>
+                                    </div>
+                                    <div class="text-center mb-4">
+                                        <span class="small text-muted">
+                                            Already have account?
+                                        </span>
+
+                                        <a href="{{ route('login') }}"
+                                        class="small text-decoration-none"
+                                        style="color: var(--brand-indigo); font-weight: 600;">
+                                            Login
+                                        </a>
+                                    </div>
+                                    <button type="submit" class="btn btn-brand w-100">Register</button>
+                                </form>
+
+                            </div>
+                        </div>
+
                     </div>
-
-                    @if(session('success'))
-                        <div class="hud-alert-success mb-4">{{ session('success') }}</div>
-                    @endif
-
-                    <form action="{{ route('auth.store') }}" method="POST" novalidate>
-                        @csrf
-
-                        <div class="mb-3">
-                            <label class="hud-form-label" for="name">Username</label>
-                            <input
-                                type="text"
-                                id="name"
-                                class="form-control @error('name') is-invalid @enderror"
-                                name="name"
-                                placeholder="e.g. shadow_runner"
-                                value="{{ old('name') }}">
-
-                            @error('name')
-                                <div class="invalid-feedback d-block">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="hud-form-label" for="email">Email address</label>
-                            <input
-                                type="email"
-                                id="email"
-                                class="form-control @error('email') is-invalid @enderror"
-                                name="email"
-                                placeholder="you@example.com"
-                                value="{{ old('email') }}">
-
-                            @error('email')
-                                <div class="invalid-feedback d-block">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        <div class="mb-4">
-                            <label class="hud-form-label" for="password">Password</label>
-                            <input
-                                type="password"
-                                id="password"
-                                class="form-control @error('password') is-invalid @enderror"
-                                name="password"
-                                placeholder="Enter a password"
-                                value="{{ old('password') }}">
-
-                            @error('password')
-                                <div class="invalid-feedback d-block">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        <button type="submit" class="btn btn-hud w-100 mb-3">Create account</button>
-
-                        <div class="text-center">
-                            <a href="{{ route('login') }}" class="hud-login-link">Already have an account? Log in</a>
-                        </div>
-                    </form>
-
                 </div>
-
             </div>
         </div>
     </div>

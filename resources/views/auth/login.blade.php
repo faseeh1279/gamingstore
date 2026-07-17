@@ -187,7 +187,17 @@
                                         </div>
                                         <a href="#" class="small text-decoration-none" style="color: var(--brand-indigo);">Forgot password?</a>
                                     </div>
+                                    <div class="text-center mb-4">
+                                        <span class="small text-muted">
+                                            Don't have an account?
+                                        </span>
 
+                                        <a href="{{ route('register') }}"
+                                        class="small text-decoration-none"
+                                        style="color: var(--brand-indigo); font-weight: 600;">
+                                            Register Now
+                                        </a>
+                                    </div>
                                     <button type="submit" class="btn btn-brand w-100">Log in</button>
                                 </form>
 

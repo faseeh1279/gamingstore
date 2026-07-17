@@ -14,20 +14,18 @@
             <div class="col-lg-6">
 
                 <span class="badge bg-warning text-dark px-3 py-2 mb-3">
-                    🎮 World's Largest PC Compatibility Database
+                    🎮 {{ __('home.hero_badge') }}
                 </span>
 
                 <h1 class="display-3 fw-bold mb-4">
-                    Can Your PC
+                    {{ __('home.hero_title_start') }}
                     <span class="text-warning">
-                        Run It?
+                        {{ __('home.hero_title_end') }}
                     </span>
                 </h1>
 
                 <p class="lead mb-4">
-                    Instantly compare your computer specifications against
-                    thousands of games. Find out whether your PC meets the
-                    minimum or recommended requirements before downloading.
+                    {{ __('hero_description') }}
                 </p>
 
                 <form class="mb-4">
@@ -42,7 +40,7 @@
 
                             <i class="bi bi-search me-2"></i>
 
-                            Search
+                            {{ __('home.search') }}
 
                         </button>
 
@@ -57,14 +55,14 @@
 
                         <i class="bi bi-pc-display me-2"></i>
 
-                        Check My PC
+                        {{ __('home.check_my_pc') }}
 
                     </a>
 
                     <a href="#popular-games"
                        class="btn btn-outline-light btn-lg">
 
-                        Browse Games
+                        {{ __('home.browse_games') }}
 
                     </a>
 
@@ -106,7 +104,7 @@
                         </h2>
 
                         <p class="text-muted mb-0">
-                            Games
+                            {{ __('home.statistics.games') }}
                         </p>
 
                     </div>
@@ -128,7 +126,7 @@
                         </h2>
 
                         <p class="text-muted mb-0">
-                            CPUs
+                            {{ __('home.statistics.cpus') }}
                         </p>
 
                     </div>
@@ -150,7 +148,7 @@
                         </h2>
 
                         <p class="text-muted mb-0">
-                            GPUs
+                            {{ __('home.statistics.gpus') }}
                         </p>
 
                     </div>
@@ -172,7 +170,7 @@
                         </h2>
 
                         <p class="text-muted mb-0">
-                            Compatibility Checks
+                            {{ __('home.statistics.checks') }}
                         </p>
 
                     </div>
@@ -197,21 +195,21 @@
             <div>
 
                 <span class="badge bg-primary mb-2">
-                    Featured
+                    {{ __('home.featured') }}
                 </span>
 
                 <h2 class="fw-bold">
-                    Popular Games
+                    {{ __('home.popular_games') }}
                 </h2>
 
                 <p class="text-muted mb-0">
-                    Most searched and most compatible games this week.
+                    {{ __('home.popular_games_description') }}
                 </p>
 
             </div>
 
             <a href="#" class="btn btn-outline-primary">
-                View All Games
+                {{ __('home.view_all_games') }}
                 <i class="bi bi-arrow-right ms-2"></i>
             </a>
 
@@ -314,16 +312,15 @@
         <div class="text-center mb-5">
 
             <span class="badge bg-primary mb-3">
-                Simple Process
+                {{ __('home.simple_process') }}
             </span>
 
             <h2 class="fw-bold display-6">
-                How CanYouRunIt Works
+                {{ __('home.how_it_works') }}
             </h2>
 
             <p class="text-muted col-lg-7 mx-auto">
-                Check whether your computer can run any game in just a few
-                simple steps.
+                {{ __('home.how_description') }}
             </p>
 
         </div>
@@ -343,14 +340,13 @@
 
                     <h4 class="fw-bold">
 
-                        Search a Game
+                        {{ __('home.steps.search_title') }}
 
                     </h4>
 
                     <p class="text-muted">
 
-                        Search from thousands of PC games available in our
-                        compatibility database.
+                        {{ __('home.steps.search_description') }}
 
                     </p>
 
@@ -371,14 +367,13 @@
 
                     <h4 class="fw-bold">
 
-                        Enter Your PC Specs
+                        {{ __('home.steps.specs_title') }}
 
                     </h4>
 
                     <p class="text-muted">
 
-                        Select your CPU, GPU, RAM, Storage and Operating System
-                        from our hardware database.
+                        {{ __('home.steps.specs_description') }}
 
                     </p>
 
@@ -399,15 +394,13 @@
 
                     <h4 class="fw-bold">
 
-                        View Compatibility
+                       {{  __('home.steps.result_title') }}
 
                     </h4>
 
                     <p class="text-muted">
 
-                        Instantly discover whether your PC meets the Minimum,
-                        Recommended or Ultra requirements.
-
+                       {{ __('home.steps.result_description') }}
                     </p>
 
                 </div>
@@ -428,15 +421,15 @@
         <div class="text-center mb-5">
 
             <span class="badge bg-success mb-3">
-                Explore
+                {{ __('home.explore') }}
             </span>
 
             <h2 class="fw-bold display-6">
-                Browse Game Categories
+                {{ __('home.browse_categories') }}
             </h2>
 
             <p class="text-muted col-lg-7 mx-auto">
-                Explore thousands of games across your favorite genres.
+                {{ __('home.categories_description') }}
             </p>
 
         </div>
@@ -504,16 +497,15 @@
         <div class="text-center mb-5">
 
             <span class="badge bg-warning text-dark mb-3">
-                Why Choose Us
+                {{ __('home.why_choose_us') }}
             </span>
 
             <h2 class="fw-bold display-6">
-                Why Gamers Love CanYouRunIt
+                {{ __('home.why_title') }}
             </h2>
 
             <p class="text-muted col-lg-8 mx-auto">
-                We help millions of gamers discover whether their PC can run the
-                latest games quickly, accurately and effortlessly.
+                {{ __('home.why_description') }}
             </p>
 
         </div>
@@ -531,12 +523,11 @@
                     </div>
 
                     <h4 class="fw-bold mt-4">
-                        Huge Game Library
+                        {{ __('home.features.library_title') }}
                     </h4>
 
                     <p class="text-muted">
-                        Browse thousands of games with detailed requirements,
-                        screenshots and compatibility information.
+                        {{ __('home.features.library_description') }}
                     </p>
 
                 </div>
@@ -554,12 +545,11 @@
                     </div>
 
                     <h4 class="fw-bold mt-4">
-                        Instant Results
+                        {{ __('home.features.instant_title') }}
                     </h4>
 
                     <p class="text-muted">
-                        Compare your PC against game requirements in seconds
-                        with our intelligent compatibility engine.
+                        {{ __('home.features.instant_description') }}
                     </p>
 
                 </div>
@@ -577,12 +567,11 @@
                     </div>
 
                     <h4 class="fw-bold mt-4">
-                        Massive Hardware Database
+                        {{ __('home.features.hardware_title') }}
                     </h4>
 
                     <p class="text-muted">
-                        Thousands of CPUs and GPUs are available to ensure
-                        accurate compatibility checks.
+                       {{ __('home.features.hardware_description')}}
                     </p>
 
                 </div>
@@ -600,12 +589,11 @@
                     </div>
 
                     <h4 class="fw-bold mt-4">
-                        Always Updated
+                        {{ __('home.features.updated_title') }}
                     </h4>
 
                     <p class="text-muted">
-                        We continuously update game requirements and hardware
-                        information as new releases become available.
+                       {{ __('home.features.updated_description') }}
                     </p>
 
                 </div>
@@ -623,12 +611,11 @@
                     </div>
 
                     <h4 class="fw-bold mt-4">
-                        Accurate Performance
+                        {{ __('home.features.performance_title') }}
                     </h4>
 
                     <p class="text-muted">
-                        View Minimum, Recommended and Performance Scores to know
-                        exactly how well your PC can handle each game.
+                        {{ __('home.features.performance_description') }}
                     </p>
 
                 </div>
@@ -646,12 +633,11 @@
                     </div>
 
                     <h4 class="fw-bold mt-4">
-                        Save Favorites
+                        {{ __('home.features.favorites_title') }}
                     </h4>
 
                     <p class="text-muted">
-                        Create your own collection of favorite games and revisit
-                        compatibility results whenever you like.
+                        {{ __('home.features.favorites_description') }}
                     </p>
 
                 </div>
