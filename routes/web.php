@@ -171,9 +171,22 @@ Route::prefix('admin')->group(function(){
     [App\Http\Controllers\Admin\CategoryController::class, 'create'])
     ->name('admin.categories.create');
 
-    Route::get('/category/view', 
+    Route::get('/category/view/{category}', 
     [App\Http\Controllers\Admin\CategoryController::class, 'view'])
     ->name('admin.categories.view');
+
+    Route::get('/category/edit/{category}', 
+        [App\Http\Controllers\Admin\CategoryController::class, 'edit'])
+        ->name('admin.categories.edit');
+
+    Route::delete('/category/delete/{category}', 
+        [App\Http\Controllers\Admin\CategoryController::class, 'delete'])
+        ->name('admin.categories.delete');
+
+    Route::put('/category/update/{category}', 
+    [App\Http\Controllers\Admin\CategoryController::class, 'update'])
+    ->name('admin.categories.update');
+
 
 }); 
 

@@ -23,7 +23,7 @@
                 Edit
             </a>
 
-            <a href="#" class="btn btn-outline-secondary">
+            <a href="{{ route('admin.categories.index') }}" class="btn btn-outline-secondary">
                 <i class="bi bi-arrow-left me-2"></i>
                 Back
             </a>
@@ -205,12 +205,12 @@
 
                     <div class="d-flex justify-content-between mb-3">
                         <span class="text-muted">Created</span>
-                        <strong>{{ $category->created_at->format('d M Y') }}</strong>
+                        <strong>{{ $category->created_at?->format('d M Y h:i A') ?? 'N/A' }}</strong>
                     </div>
 
                     <div class="d-flex justify-content-between">
                         <span class="text-muted">Last Updated</span>
-                        <strong>{{ $category->updated_at->format('d M Y') }}</strong>
+                        <strong>{{ $category->created_at?->format('d M Y h:i A') ?? 'N/A' }}</strong>
                     </div>
 
                 </div>
@@ -228,7 +228,7 @@
 
                 <div class="card-body d-grid gap-2">
 
-                    <a href="#"
+                    <a href="{{ route('admin.categories.edit', $category) }}"
                         class="btn btn-warning">
 
                         <i class="bi bi-pencil-square me-2"></i>

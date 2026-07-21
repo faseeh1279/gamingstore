@@ -1,122 +1,214 @@
 @extends('layouts.admin')
 
 @section('title', 'Categories')
+@section('page-title', 'Categories')
 
 @section('content')
 
-<div class="container-fluid py-4">
+<div class="container-fluid">
 
-    {{-- Page Header --}}
-    <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
+    {{-- Header --}}
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
         <div>
-            <h2 class="fw-bold mb-1">Categories</h2>
+
+            <h3 class="fw-bold mb-1">
+                Categories
+            </h3>
+
             <p class="text-muted mb-0">
-                Manage all game categories from one place.
+                Manage all game categories.
             </p>
+
         </div>
 
-        <a href="{{ route('admin.categories.create') }}" class="btn btn-primary">
-            <i class="bi bi-plus-circle me-2"></i>
+        <a
+            href="{{ route('admin.categories.create') }}"
+            class="btn btn-primary">
+
+            <i class="bi bi-plus-circle me-1"></i>
+
             Add Category
+
         </a>
+
     </div>
 
     {{-- Statistics --}}
-    <div class="row g-4 mb-4">
+    <div class="row g-3 mb-4">
 
-        <div class="col-lg-3 col-md-6">
-            <div class="card border-0 shadow-sm h-100">
+        <div class="col-lg-4">
+
+            <div class="card border-0 shadow-sm">
+
                 <div class="card-body d-flex justify-content-between align-items-center">
+
                     <div>
-                        <small class="text-muted text-uppercase">Total Categories</small>
-                        <h3 class="fw-bold mt-2 mb-0">24</h3>
+
+                        <small class="text-muted">
+                            Total Categories
+                        </small>
+
+                        <h3 class="fw-bold mb-0">
+
+                            {{ $stats['total'] }}
+
+                        </h3>
+
                     </div>
 
                     <div class="bg-primary bg-opacity-10 rounded-circle p-3">
-                        <i class="bi bi-grid fs-3 text-primary"></i>
+
+                        <i class="bi bi-grid text-primary fs-3"></i>
+
                     </div>
+
                 </div>
+
             </div>
+
         </div>
 
-        <div class="col-lg-3 col-md-6">
-            <div class="card border-0 shadow-sm h-100">
+        <div class="col-lg-4">
+
+            <div class="card border-0 shadow-sm">
+
                 <div class="card-body d-flex justify-content-between align-items-center">
+
                     <div>
-                        <small class="text-muted text-uppercase">Active</small>
-                        <h3 class="fw-bold mt-2 mb-0 text-success">21</h3>
+
+                        <small class="text-muted">
+                            Active
+                        </small>
+
+                        <h3 class="fw-bold text-success mb-0">
+
+                            {{ $stats['active'] }}
+
+                        </h3>
+
                     </div>
 
                     <div class="bg-success bg-opacity-10 rounded-circle p-3">
-                        <i class="bi bi-check-circle fs-3 text-success"></i>
+
+                        <i class="bi bi-check-circle text-success fs-3"></i>
+
                     </div>
+
                 </div>
+
             </div>
+
         </div>
 
-        <div class="col-lg-3 col-md-6">
-            <div class="card border-0 shadow-sm h-100">
+        <div class="col-lg-4">
+
+            <div class="card border-0 shadow-sm">
+
                 <div class="card-body d-flex justify-content-between align-items-center">
+
                     <div>
-                        <small class="text-muted text-uppercase">Inactive</small>
-                        <h3 class="fw-bold mt-2 mb-0 text-danger">3</h3>
+
+                        <small class="text-muted">
+                            Inactive
+                        </small>
+
+                        <h3 class="fw-bold text-danger mb-0">
+
+                            {{ $stats['inactive'] }}
+
+                        </h3>
+
                     </div>
 
                     <div class="bg-danger bg-opacity-10 rounded-circle p-3">
-                        <i class="bi bi-x-circle fs-3 text-danger"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <div class="col-lg-3 col-md-6">
-            <div class="card border-0 shadow-sm h-100">
-                <div class="card-body d-flex justify-content-between align-items-center">
-                    <div>
-                        <small class="text-muted text-uppercase">Games Tagged</small>
-                        <h3 class="fw-bold mt-2 mb-0">438</h3>
+                        <i class="bi bi-x-circle text-danger fs-3"></i>
+
                     </div>
 
-                    <div class="bg-warning bg-opacity-10 rounded-circle p-3">
-                        <i class="bi bi-controller fs-3 text-warning"></i>
-                    </div>
                 </div>
+
             </div>
+
         </div>
 
     </div>
 
-    {{-- Categories Table --}}
+    {{-- Table --}}
     <div class="card border-0 shadow-sm">
 
-        <div class="card-header bg-white border-bottom">
+        <div class="card-header bg-white">
 
-            <div class="row align-items-center g-3">
+            <form method="GET">
 
-                <div class="col-md-6">
-                    <h5 class="mb-0 fw-semibold">
-                        Category List
-                    </h5>
-                </div>
+                <div class="row g-2">
 
-                <div class="col-md-6">
-
-                    <div class="d-flex justify-content-md-end gap-2">
+                    <div class="col-md-5">
 
                         <input
                             type="text"
+                            name="search"
                             class="form-control"
-                            placeholder="Search categories...">
+                            placeholder="Search category..."
+                            value="{{ request('search') }}">
 
-                        <button class="btn btn-outline-secondary">
-                            <i class="bi bi-funnel"></i>
+                    </div>
+
+                    <div class="col-md-3">
+
+                        <select
+                            name="status"
+                            class="form-select">
+
+                            <option value="">
+                                All Status
+                            </option>
+
+                            <option
+                                value="1"
+                                @selected(request('status')=='1')>
+
+                                Active
+
+                            </option>
+
+                            <option
+                                value="0"
+                                @selected(request('status')=='0')>
+
+                                Inactive
+
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="col-md-4 text-md-end">
+
+                        <button
+                            class="btn btn-primary">
+
+                            <i class="bi bi-search"></i>
+
+                            Search
+
                         </button>
+
+                        <a
+                            href="{{ route('admin.categories.index') }}"
+                            class="btn btn-outline-secondary">
+
+                            Reset
+
+                        </a>
 
                     </div>
 
                 </div>
 
-            </div>
+            </form>
 
         </div>
 
@@ -127,165 +219,167 @@
                 <thead class="table-light">
 
                     <tr>
+
                         <th>#</th>
+
                         <th>Icon</th>
+
                         <th>Name</th>
+
                         <th>Slug</th>
+
                         <th>Description</th>
+
                         <th>Status</th>
-                        <th>Games</th>
-                        <th class="text-end">Actions</th>
+
+                        <th class="text-end">
+                            Actions
+                        </th>
+
                     </tr>
 
                 </thead>
 
                 <tbody>
 
-                    <tr>
+                    @forelse($categories as $category)
 
-                        <td>1</td>
+                        <tr>
 
-                        <td>
-                            <i class="bi bi-controller fs-4 text-primary"></i>
-                        </td>
+                            <td>
 
-                        <td>
-                            <strong>Action</strong>
-                        </td>
+                                {{ $loop->iteration + $categories->firstItem() - 1 }}
 
-                        <td>
-                            <span class="text-muted">action</span>
-                        </td>
+                            </td>
 
-                        <td>
-                            Fast-paced combat and adventure games.
-                        </td>
+                            <td>
 
-                        <td>
-                            <span class="badge bg-success">
-                                Active
-                            </span>
-                        </td>
+                                @if($category->icon)
 
-                        <td>124</td>
+                                    <i class="{{ $category->icon }} fs-4 text-primary"></i>
 
-                        <td class="text-end">
+                                @else
 
-                            <div class="btn-group">
+                                    <i class="bi bi-grid fs-4 text-secondary"></i>
 
-                                <a href="#" class="btn btn-sm btn-outline-primary">
-                                    <i class="bi bi-eye"></i>
-                                </a>
+                                @endif
 
-                                <a href="#" class="btn btn-sm btn-outline-warning">
-                                    <i class="bi bi-pencil-square"></i>
-                                </a>
+                            </td>
 
-                                <button class="btn btn-sm btn-outline-danger">
-                                    <i class="bi bi-trash"></i>
-                                </button>
+                            <td>
 
-                            </div>
+                                <strong>
 
-                        </td>
+                                    {{ $category->name }}
 
-                    </tr>
+                                </strong>
 
-                    <tr>
+                            </td>
 
-                        <td>2</td>
+                            <td>
 
-                        <td>
-                            <i class="bi bi-globe fs-4 text-success"></i>
-                        </td>
+                                {{ $category->slug }}
 
-                        <td>
-                            <strong>Open World</strong>
-                        </td>
+                            </td>
 
-                        <td>open-world</td>
+                            <td>
 
-                        <td>
-                            Explore massive open environments.
-                        </td>
+                                {{ Str::limit($category->description,60) }}
 
-                        <td>
-                            <span class="badge bg-success">
-                                Active
-                            </span>
-                        </td>
+                            </td>
 
-                        <td>67</td>
+                            <td>
 
-                        <td class="text-end">
+                                @if($category->is_active)
 
-                            <div class="btn-group">
+                                    <span class="badge bg-success">
 
-                                <a href="#" class="btn btn-sm btn-outline-primary">
-                                    <i class="bi bi-eye"></i>
-                                </a>
+                                        Active
 
-                                <a href="#" class="btn btn-sm btn-outline-warning">
-                                    <i class="bi bi-pencil-square"></i>
-                                </a>
+                                    </span>
 
-                                <button class="btn btn-sm btn-outline-danger">
-                                    <i class="bi bi-trash"></i>
-                                </button>
+                                @else
 
-                            </div>
+                                    <span class="badge bg-danger">
 
-                        </td>
+                                        Inactive
 
-                    </tr>
+                                    </span>
 
-                    <tr>
+                                @endif
 
-                        <td>3</td>
+                            </td>
 
-                        <td>
-                            <i class="bi bi-car-front fs-4 text-danger"></i>
-                        </td>
+                            <td class="text-end">
 
-                        <td>
-                            <strong>Racing</strong>
-                        </td>
+                                <div class="btn-group">
 
-                        <td>racing</td>
+                                    <a
+                                        href="{{ route('admin.categories.view',$category) }}"
+                                        class="btn btn-sm btn-outline-primary">
 
-                        <td>
-                            High-speed racing games.
-                        </td>
+                                        <i class="bi bi-eye"></i>
 
-                        <td>
-                            <span class="badge bg-secondary">
-                                Inactive
-                            </span>
-                        </td>
+                                    </a>
 
-                        <td>31</td>
+                                    <a
+                                        href="{{ route('admin.categories.edit',$category) }}"
+                                        class="btn btn-sm btn-outline-warning">
 
-                        <td class="text-end">
+                                        <i class="bi bi-pencil"></i>
 
-                            <div class="btn-group">
+                                    </a>
 
-                                <a href="#" class="btn btn-sm btn-outline-primary">
-                                    <i class="bi bi-eye"></i>
-                                </a>
+                                    <form
+                                        action="{{ route('admin.categories.delete',$category) }}"
+                                        method="POST"
+                                        class="d-inline"
+                                        onsubmit="return confirm('Delete this category?')">
 
-                                <a href="#" class="btn btn-sm btn-outline-warning">
-                                    <i class="bi bi-pencil-square"></i>
-                                </a>
+                                        @csrf
 
-                                <button class="btn btn-sm btn-outline-danger">
-                                    <i class="bi bi-trash"></i>
-                                </button>
+                                        @method('DELETE')
 
-                            </div>
+                                        <button
+                                            class="btn btn-sm btn-outline-danger">
 
-                        </td>
+                                            <i class="bi bi-trash"></i>
 
-                    </tr>
+                                        </button>
+
+                                    </form>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+                    @empty
+
+                        <tr>
+
+                            <td colspan="7" class="text-center py-5">
+
+                                <i class="bi bi-folder2-open display-4 text-muted"></i>
+
+                                <h5 class="mt-3">
+
+                                    No Categories Found
+
+                                </h5>
+
+                                <p class="text-muted">
+
+                                    Click the "Add Category" button to create your first category.
+
+                                </p>
+
+                            </td>
+
+                        </tr>
+
+                    @endforelse
 
                 </tbody>
 
@@ -293,62 +387,37 @@
 
         </div>
 
-        {{-- Footer --}}
-        <div class="card-footer bg-white">
+        @if($categories->hasPages())
 
-            <div class="row align-items-center">
+            <div class="card-footer bg-white">
 
-                <div class="col-md-6">
+                <div class="d-flex justify-content-between align-items-center flex-wrap">
+
                     <small class="text-muted">
-                        Showing 1 to 10 of 24 categories.
+
+                        Showing
+
+                        <strong>{{ $categories->firstItem() }}</strong>
+
+                        to
+
+                        <strong>{{ $categories->lastItem() }}</strong>
+
+                        of
+
+                        <strong>{{ $categories->total() }}</strong>
+
+                        Categories
+
                     </small>
-                </div>
 
-                <div class="col-md-6">
-
-                    <nav class="d-flex justify-content-md-end justify-content-center mt-3 mt-md-0">
-
-                        <ul class="pagination pagination-sm mb-0">
-
-                            <li class="page-item disabled">
-                                <a class="page-link" href="#">
-                                    Previous
-                                </a>
-                            </li>
-
-                            <li class="page-item active">
-                                <a class="page-link" href="#">
-                                    1
-                                </a>
-                            </li>
-
-                            <li class="page-item">
-                                <a class="page-link" href="#">
-                                    2
-                                </a>
-                            </li>
-
-                            <li class="page-item">
-                                <a class="page-link" href="#">
-                                    3
-                                </a>
-                            </li>
-
-                            <li class="page-item">
-                                <a class="page-link" href="#">
-                                    Next
-                                </a>
-                            </li>
-
-                        </ul>
-
-                    </nav>
+                    {{ $categories->withQueryString()->links() }}
 
                 </div>
 
             </div>
 
-        </div>
+        @endif
 
     </div>
 
