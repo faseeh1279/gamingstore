@@ -145,9 +145,25 @@ Route::prefix('admin')->group(function(){
     [App\Http\Controllers\Admin\DeveloperController::class, 'create'])
     ->name('admin.developer.create');
 
-    Route::get('/developers/view', 
+    Route::get('/developer/view/{developer}', 
     [App\Http\Controllers\Admin\DeveloperController::class, 'view'])
     ->name('admin.developer.view');
+
+    Route::post('/developer/store', 
+    [App\Http\Controllers\Admin\DeveloperController::class, 'store'])
+    ->name('admin.developer.store');
+
+    Route::get('/developer/edit/{developer}', 
+    [App\Http\Controllers\Admin\DeveloperController::class, 'edit'])
+    ->name('admin.developer.edit');
+
+    Route::put('/developer/update/{developer}', 
+    [App\Http\Controllers\Admin\DeveloperController::class, 'update'])
+    ->name('admin.developer.update');
+
+    Route::delete('/developer/delete/{developer}', 
+    [App\Http\Controllers\Admin\DeveloperController::class, 'destroy'])
+    ->name('admin.developer.delete');
 
     // Publisher Routes 
     Route::get('/publisher', 
@@ -171,6 +187,10 @@ Route::prefix('admin')->group(function(){
     [App\Http\Controllers\Admin\CategoryController::class, 'create'])
     ->name('admin.categories.create');
 
+    Route::post('/category/store', 
+    [App\Http\Controllers\Admin\CategoryController::class, 'store'])
+    ->name('admin.categories.store');
+
     Route::get('/category/view/{category}', 
     [App\Http\Controllers\Admin\CategoryController::class, 'view'])
     ->name('admin.categories.view');
@@ -180,7 +200,7 @@ Route::prefix('admin')->group(function(){
         ->name('admin.categories.edit');
 
     Route::delete('/category/delete/{category}', 
-        [App\Http\Controllers\Admin\CategoryController::class, 'delete'])
+        [App\Http\Controllers\Admin\CategoryController::class, 'destroy'])
         ->name('admin.categories.delete');
 
     Route::put('/category/update/{category}', 

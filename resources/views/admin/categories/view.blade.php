@@ -18,7 +18,7 @@
 
         <div class="d-flex gap-2">
 
-            <a href="#" class="btn btn-warning">
+            <a href="{{ route('admin.categories.edit', $category) }}" class="btn btn-warning">
                 <i class="bi bi-pencil-square me-2"></i>
                 Edit
             </a>

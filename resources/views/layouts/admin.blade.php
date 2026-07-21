@@ -242,6 +242,98 @@
     .submenu-link.active i {
         color: #fff;
     }
+
+    /* Container positioned fixed over the content */
+    .toast-container {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 9999; /* Keeps it above page content */
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        max-width: 360px; /* Reduced width */
+        width: 90%;
+    }
+
+    /* Floating Toast Card */
+    .custom-toast {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 16px;
+        border-radius: 10px;
+        background: #ffffff;
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        border-left: 5px solid;
+        animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        transition: all 0.4s ease;
+    }
+
+    /* Success & Error Themes */
+    .toast-success {
+        border-left-color: #10b981;
+        color: #065f46;
+    }
+    .toast-success .toast-icon {
+        color: #10b981;
+    }
+
+    .toast-danger {
+        border-left-color: #ef4444;
+        color: #991b1b;
+    }
+    .toast-danger .toast-icon {
+        color: #ef4444;
+    }
+
+    /* Layout Details */
+    .toast-icon {
+        display: flex;
+        align-items: center;
+        flex-shrink: 0;
+    }
+
+    .toast-message {
+        font-size: 0.9rem;
+        font-weight: 500;
+        line-height: 1.4;
+        flex-grow: 1;
+    }
+
+    /* Close Button */
+    .toast-close {
+        background: transparent;
+        border: none;
+        font-size: 18px;
+        line-height: 1;
+        color: #9ca3af;
+        cursor: pointer;
+        padding: 2px 4px;
+        border-radius: 4px;
+        transition: color 0.2s ease;
+    }
+    .toast-close:hover {
+        color: #374151;
+    }
+
+    /* Smooth Slide-In Animation */
+    @keyframes slideIn {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
+    /* Hide State for Fade-Out */
+    .custom-toast.hide {
+        transform: translateX(120%);
+        opacity: 0;
+    }
     
     </style>
 </head>
@@ -249,7 +341,20 @@
 <div class="wrapper">
     @include('admin.partials.sidebar')
     <div class="main" id="main">
-        @include('admin.partials.navbar')
+         @include('admin.partials.navbar')
+        {{--@if(session('success'))
+            <div class="alert alert-success alert-dismissible fade show auto-dismiss" role="alert">
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+        @if(session('error'))
+            <div class="alert alert-danger alert-dismissible fade show auto-dismiss" role="alert">
+                {{ session('error') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif --}}
+        @include('admin.partials.flash-messages')
         <div class="content p-4">
             @yield('content')
         </div>
@@ -260,13 +365,32 @@
 </html>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 <script>
+    // Function to handle close button click
+    function dismissToast(button) {
+        const toast = button.closest('.custom-toast');
+        if (toast) {
+            toast.classList.add('hide');
+            setTimeout(() => toast.remove(), 400);
+        }
+    }
     document.addEventListener("DOMContentLoaded", function () {
+    // Select all alerts marked for auto-dismiss
+    const toasts = document.querySelectorAll('.auto-dismiss');
+
+    toasts.forEach(function (toast) {
+        // Auto-close after 4.5 seconds
+        setTimeout(function () {
+            toast.classList.add('hide');
+            setTimeout(function () {
+                toast.remove();
+            }, 400);
+        }, 4500);
+    });
     const sidebar = document.getElementById("sidebar");
     const main = document.getElementById("main");
     const collapseBtn = document.getElementById("sidebarCollapse");
     const mobileBtn = document.getElementById("mobileSidebarToggle");
     const overlay = document.getElementById("overlay");
-    // Desktop Sidebar Collapse
     // Desktop Sidebar Collapse
     if (collapseBtn) {
         collapseBtn.addEventListener("click", function () {
