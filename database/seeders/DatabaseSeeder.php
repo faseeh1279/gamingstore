@@ -19,7 +19,9 @@ class DatabaseSeeder extends Seeder
         $this->call([ 
             AdminSeeder::class, 
             CategorySeeder::class, 
-            PlatformSeeder::class
+            PlatformSeeder::class, 
+            CpuSeeder::class,
+            GpuSeeder::class,
         ]);
     }
 }

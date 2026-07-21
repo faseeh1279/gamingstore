@@ -12,7 +12,7 @@
         <div class="card-header bg-white d-flex justify-content-between align-items-center">
             <h5 class="mb-0">Add New CPU</h5>
 
-            <a href="#" class="btn btn-outline-secondary">
+            <a href="{{ route('admin.hardware.cpu.index') }}" class="btn btn-outline-secondary">
                 <i class="bi bi-arrow-left me-1"></i>
                 Back
             </a>
@@ -20,9 +20,8 @@
 
         <div class="card-body">
 
-            <form action="#" method="POST">
+            <form action="{{ route('admin.hardware.cpu.store') }}" method="POST">
                 @csrf
-
                 <div class="row g-3">
 
                     <div class="col-md-6">
@@ -80,7 +79,7 @@
 
                     <div class="col-md-4">
                         <label class="form-label">
-                            Performance Score <span class="text-danger">*</span>
+                            Benchmark Score <span class="text-danger">*</span>
                         </label>
 
                         <input
@@ -169,7 +168,7 @@
                     </button>
 
                     <a
-                        href="#"
+                        href="{{ route('admin.hardware.cpu.index') }}"
                         class="btn btn-secondary">
 
                         Cancel

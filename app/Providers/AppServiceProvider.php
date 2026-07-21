@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Enum\UserRole;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,8 +22,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-       Gate::define('is-admin', function ($user) {
+        Gate::define('is-admin', function ($user) {
             return $user->role === UserRole::Admin;
-        }); 
+            }); 
+        Paginator::useBootstrapFive();
     }
 }

@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
-@section('title', 'Add GPU')
-@section('page-title', 'Add GPU')
+@section('title', 'Edit CPU')
+@section('page-title', 'Edit CPU')
 
 @section('content')
 
@@ -13,11 +13,11 @@
 
             <h5 class="mb-0">
 
-                Add New GPU
+                Edit CPU
 
             </h5>
 
-            <a href="{{ route('admin.hardware.gpu.index') }}"
+            <a href="{{ route('admin.hardware.cpu.index') }}"
                class="btn btn-outline-secondary">
 
                 <i class="bi bi-arrow-left me-1"></i>
@@ -30,10 +30,12 @@
 
         <div class="card-body">
 
-            <form action="{{ route('admin.hardware.gpu.store') }}"
+            <form action="{{ route('admin.hardware.cpu.update', $cpu) }}"
                   method="POST">
 
                 @csrf
+
+                @method('PUT')
 
                 <div class="row g-3">
 
@@ -54,38 +56,32 @@
 
                             <option value="">Select Manufacturer</option>
 
-                            <option value="NVIDIA" {{ old('manufacturer') == 'NVIDIA' ? 'selected' : '' }}>
-                                NVIDIA
-                            </option>
-
-                            <option value="AMD" {{ old('manufacturer') == 'AMD' ? 'selected' : '' }}>
-                                AMD
-                            </option>
-
-                            <option value="Intel" {{ old('manufacturer') == 'Intel' ? 'selected' : '' }}>
+                            <option value="Intel"
+                                {{ old('manufacturer', $cpu->manufacturer) == 'Intel' ? 'selected' : '' }}>
                                 Intel
+                            </option>
+
+                            <option value="AMD"
+                                {{ old('manufacturer', $cpu->manufacturer) == 'AMD' ? 'selected' : '' }}>
+                                AMD
                             </option>
 
                         </select>
 
                         @error('manufacturer')
-
                             <div class="invalid-feedback">
-
                                 {{ $message }}
-
                             </div>
-
                         @enderror
 
                     </div>
 
-                    {{-- GPU Model --}}
+                    {{-- Model --}}
                     <div class="col-md-6">
 
                         <label class="form-label">
 
-                            GPU Model
+                            CPU Model
                             <span class="text-danger">*</span>
 
                         </label>
@@ -94,47 +90,62 @@
                             type="text"
                             name="model"
                             class="form-control @error('model') is-invalid @enderror"
-                            value="{{ old('model') }}"
-                            placeholder="GeForce RTX 4070 Ti"
+                            value="{{ old('model', $cpu->model) }}"
+                            placeholder="Intel Core i7-12700K"
                             required>
 
                         @error('model')
-
                             <div class="invalid-feedback">
-
                                 {{ $message }}
-
                             </div>
-
                         @enderror
 
                     </div>
 
-                    {{-- VRAM --}}
+                    {{-- Cores --}}
                     <div class="col-md-4">
 
                         <label class="form-label">
 
-                            VRAM (GB)
+                            Cores
 
                         </label>
 
                         <input
                             type="number"
-                            step="0.5"
-                            name="vram"
-                            class="form-control @error('vram') is-invalid @enderror"
-                            value="{{ old('vram') }}"
-                            placeholder="12">
+                            name="cores"
+                            class="form-control @error('cores') is-invalid @enderror"
+                            value="{{ old('cores', $cpu->cores) }}"
+                            placeholder="8">
 
-                        @error('vram')
-
+                        @error('cores')
                             <div class="invalid-feedback">
-
                                 {{ $message }}
-
                             </div>
+                        @enderror
 
+                    </div>
+
+                    {{-- Threads --}}
+                    <div class="col-md-4">
+
+                        <label class="form-label">
+
+                            Threads
+
+                        </label>
+
+                        <input
+                            type="number"
+                            name="threads"
+                            class="form-control @error('threads') is-invalid @enderror"
+                            value="{{ old('threads', $cpu->threads) }}"
+                            placeholder="16">
+
+                        @error('threads')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
                         @enderror
 
                     </div>
@@ -153,8 +164,7 @@
                             type="number"
                             name="score"
                             class="form-control @error('score') is-invalid @enderror"
-                            value="{{ old('score') }}"
-                            placeholder="24800"
+                            value="{{ old('score', $cpu->score) }}"
                             required>
 
                         <small class="text-muted">
@@ -164,19 +174,65 @@
                         </small>
 
                         @error('score')
-
                             <div class="invalid-feedback">
-
                                 {{ $message }}
-
                             </div>
+                        @enderror
 
+                    </div>
+
+                    {{-- Base Clock --}}
+                    <div class="col-md-6">
+
+                        <label class="form-label">
+
+                            Base Clock (GHz)
+
+                        </label>
+
+                        <input
+                            type="number"
+                            step="0.01"
+                            name="base_clock"
+                            class="form-control @error('base_clock') is-invalid @enderror"
+                            value="{{ old('base_clock', $cpu->base_clock) }}"
+                            placeholder="3.60">
+
+                        @error('base_clock')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+
+                    </div>
+
+                    {{-- Boost Clock --}}
+                    <div class="col-md-6">
+
+                        <label class="form-label">
+
+                            Boost Clock (GHz)
+
+                        </label>
+
+                        <input
+                            type="number"
+                            step="0.01"
+                            name="boost_clock"
+                            class="form-control @error('boost_clock') is-invalid @enderror"
+                            value="{{ old('boost_clock', $cpu->boost_clock) }}"
+                            placeholder="5.00">
+
+                        @error('boost_clock')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
                         @enderror
 
                     </div>
 
                     {{-- Release Year --}}
-                    <div class="col-md-4">
+                    <div class="col-md-6">
 
                         <label class="form-label">
 
@@ -188,19 +244,14 @@
                             type="number"
                             name="release_year"
                             class="form-control @error('release_year') is-invalid @enderror"
-                            value="{{ old('release_year') }}"
+                            value="{{ old('release_year', $cpu->release_year) }}"
                             min="1990"
-                            max="{{ date('Y') + 1 }}"
-                            placeholder="2023">
+                            max="{{ date('Y') + 1 }}">
 
                         @error('release_year')
-
                             <div class="invalid-feedback">
-
                                 {{ $message }}
-
                             </div>
-
                         @enderror
 
                     </div>
@@ -218,28 +269,22 @@
                             name="is_active"
                             class="form-select @error('is_active') is-invalid @enderror">
 
-                            <option value="1" selected>
-
+                            <option value="1"
+                                {{ old('is_active', $cpu->is_active) == 1 ? 'selected' : '' }}>
                                 Active
-
                             </option>
 
-                            <option value="0">
-
+                            <option value="0"
+                                {{ old('is_active', $cpu->is_active) == 0 ? 'selected' : '' }}>
                                 Inactive
-
                             </option>
 
                         </select>
 
                         @error('is_active')
-
                             <div class="invalid-feedback">
-
                                 {{ $message }}
-
                             </div>
-
                         @enderror
 
                     </div>
@@ -248,7 +293,7 @@
 
                 <div class="mt-4 d-flex justify-content-end gap-2">
 
-                    <a href="{{ route('admin.hardware.gpu.index') }}"
+                    <a href="{{ route('admin.hardware.cpu.index') }}"
                        class="btn btn-secondary">
 
                         Cancel
@@ -261,7 +306,7 @@
 
                         <i class="bi bi-check-circle me-1"></i>
 
-                        Save GPU
+                        Update CPU
 
                     </button>
 

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DocumentController; 
 
 Route::get('/', function () {
 
@@ -101,14 +102,39 @@ Route::prefix('admin')->group(function(){
 
     Route::get('/hardware/cpu/create', [App\Http\Controllers\Admin\Hardware\CpuController::class, 'create'])->name('admin.hardware.cpu.create');
 
-    Route::get('/hardware/cpu/view', [App\Http\Controllers\Admin\Hardware\CpuController::class, 'view'])->name('admin.hardware.cpu.view'); 
+    // Route::get('/hardware/cpu/view', [App\Http\Controllers\Admin\Hardware\CpuController::class, 'view'])->name('admin.hardware.cpu.view'); 
 
     // Hardware Gpu Routes 
     Route::get('/hardware/gpu', [App\Http\Controllers\Admin\Hardware\GpuController::class, 'index'])->name('admin.hardware.gpu.index'); 
 
     Route::get('/hardware/gpu/create', [App\Http\Controllers\Admin\Hardware\GpuController::class, 'create'])->name('admin.hardware.gpu.create'); 
 
-    Route::get('/hardware/gpu/create', [App\Http\Controllers\Admin\Hardware\GpuController::class, 'view'])->name('admin.hardware.gpu.view'); 
+    Route::get('/hardware/gpu/view/{gpu}', [App\Http\Controllers\Admin\Hardware\GpuController::class, 'show'])->name('admin.hardware.gpu.view'); 
+
+    Route::get('/hardware/gpu/edit/{gpu}', [App\Http\Controllers\Admin\Hardware\GpuController::class, 'edit'])->name('admin.hardware.gpu.edit'); 
+
+
+    Route::post('/hardware/cpu/store', [App\Http\Controllers\Admin\Hardware\CpuController::class, 'store'])->name('admin.hardware.cpu.store'); 
+
+    Route::delete('/hardware/cpu/destroy/{cpu}',[App\Http\Controllers\Admin\Hardware\CpuController::class, 'destroy'])->name('admin.hardware.cpu.destroy'); 
+
+    Route::get('/hardware/cpu/edit/{cpu}', [App\Http\Controllers\Admin\Hardware\CpuController::class, 'edit'])->name('admin.hardware.cpu.edit'); 
+
+    Route::get('/hardware/cpu/view/{cpu}', [App\Http\Controllers\Admin\Hardware\CpuController::class, 'show'])->name('admin.hardware.cpu.view'); 
+
+    Route::put('/hardware/cpu/update/{cpu}', [App\Http\Controllers\Admin\Hardware\CpuController::class, 'update'])->name('admin.hardware.cpu.update'); 
+
+    Route::post('/hardware/gpu/store', [App\Http\Controllers\Admin\Hardware\GpuController::class, 'store'])->name('admin.hardware.gpu.store'); 
+
+    Route::put('/hardware/gpu/update/{gpu}', [App\Http\Controllers\Admin\Hardware\GpuController::class, 'update'])->name('admin.hardware.gpu.update'); 
+
+
+
+    
+    Route::delete('/hardware/gpu/destroy/{gpu}', [App\Http\Controllers\Admin\Hardware\GpuController::class, 'destroy'])->name('admin.hardware.gpu.destroy'); 
+
+    
+
 
     // Developer Routes 
     Route::get('/developers', 
@@ -162,3 +188,16 @@ Route::prefix('admin')->group(function(){
 //         'allows' => Illuminate\Support\Facades\Gate::allows('is-admin'),
 //     ];
 // })->middleware('auth');
+
+Route::resource('documents', DocumentController::class);
+    // ->except(['create', 'show']); 
+
+// Route::get('/documents', [DocumentController::class, 'index'])->name('documents.index');
+
+// Route::post('/documents', [DocumentController::class, 'store'])->name('documents.store');
+
+// Route::get('/documents/{document}/edit', [DocumentController::class, 'edit'])->name('documents.edit');
+
+// Route::put('/documents/{document}', [DocumentController::class, 'update'])->name('documents.update');
+
+// Route::delete('/documents/{document}', [DocumentController::class, 'destroy'])->name('documents.destroy');

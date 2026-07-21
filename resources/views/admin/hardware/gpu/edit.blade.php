@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
-@section('title', 'Add GPU')
-@section('page-title', 'Add GPU')
+@section('title', 'Edit GPU')
+@section('page-title', 'Edit GPU')
 
 @section('content')
 
@@ -13,7 +13,7 @@
 
             <h5 class="mb-0">
 
-                Add New GPU
+                Edit GPU
 
             </h5>
 
@@ -30,10 +30,12 @@
 
         <div class="card-body">
 
-            <form action="{{ route('admin.hardware.gpu.store') }}"
+            <form action="{{ route('admin.hardware.gpu.update', $gpu) }}"
                   method="POST">
 
                 @csrf
+
+                @method('PUT')
 
                 <div class="row g-3">
 
@@ -54,16 +56,25 @@
 
                             <option value="">Select Manufacturer</option>
 
-                            <option value="NVIDIA" {{ old('manufacturer') == 'NVIDIA' ? 'selected' : '' }}>
+                            <option value="NVIDIA"
+                                {{ old('manufacturer', $gpu->manufacturer) == 'NVIDIA' ? 'selected' : '' }}>
+
                                 NVIDIA
+
                             </option>
 
-                            <option value="AMD" {{ old('manufacturer') == 'AMD' ? 'selected' : '' }}>
+                            <option value="AMD"
+                                {{ old('manufacturer', $gpu->manufacturer) == 'AMD' ? 'selected' : '' }}>
+
                                 AMD
+
                             </option>
 
-                            <option value="Intel" {{ old('manufacturer') == 'Intel' ? 'selected' : '' }}>
+                            <option value="Intel"
+                                {{ old('manufacturer', $gpu->manufacturer) == 'Intel' ? 'selected' : '' }}>
+
                                 Intel
+
                             </option>
 
                         </select>
@@ -94,7 +105,7 @@
                             type="text"
                             name="model"
                             class="form-control @error('model') is-invalid @enderror"
-                            value="{{ old('model') }}"
+                            value="{{ old('model', $gpu->model) }}"
                             placeholder="GeForce RTX 4070 Ti"
                             required>
 
@@ -124,7 +135,7 @@
                             step="0.5"
                             name="vram"
                             class="form-control @error('vram') is-invalid @enderror"
-                            value="{{ old('vram') }}"
+                            value="{{ old('vram', $gpu->vram) }}"
                             placeholder="12">
 
                         @error('vram')
@@ -139,7 +150,7 @@
 
                     </div>
 
-                    {{-- Score --}}
+                    {{-- Benchmark Score --}}
                     <div class="col-md-4">
 
                         <label class="form-label">
@@ -153,8 +164,7 @@
                             type="number"
                             name="score"
                             class="form-control @error('score') is-invalid @enderror"
-                            value="{{ old('score') }}"
-                            placeholder="24800"
+                            value="{{ old('score', $gpu->score) }}"
                             required>
 
                         <small class="text-muted">
@@ -188,10 +198,9 @@
                             type="number"
                             name="release_year"
                             class="form-control @error('release_year') is-invalid @enderror"
-                            value="{{ old('release_year') }}"
+                            value="{{ old('release_year', $gpu->release_year) }}"
                             min="1990"
-                            max="{{ date('Y') + 1 }}"
-                            placeholder="2023">
+                            max="{{ date('Y') + 1 }}">
 
                         @error('release_year')
 
@@ -218,13 +227,15 @@
                             name="is_active"
                             class="form-select @error('is_active') is-invalid @enderror">
 
-                            <option value="1" selected>
+                            <option value="1"
+                                {{ old('is_active', $gpu->is_active) == 1 ? 'selected' : '' }}>
 
                                 Active
 
                             </option>
 
-                            <option value="0">
+                            <option value="0"
+                                {{ old('is_active', $gpu->is_active) == 0 ? 'selected' : '' }}>
 
                                 Inactive
 
@@ -261,7 +272,7 @@
 
                         <i class="bi bi-check-circle me-1"></i>
 
-                        Save GPU
+                        Update GPU
 
                     </button>
 
