@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             PlatformSeeder::class, 
             CpuSeeder::class,
             GpuSeeder::class,
+            CategorySeeder::class
         ]);
     }
 }

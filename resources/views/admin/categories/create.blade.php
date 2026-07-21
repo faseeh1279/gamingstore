@@ -21,7 +21,7 @@
         </a>
     </div>
 
-    <form action="#" method="POST">
+    <form action="{{ route('admin.categories.store') }}" method="POST">
 
         @csrf
 
