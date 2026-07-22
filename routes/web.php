@@ -178,6 +178,22 @@ Route::prefix('admin')->group(function(){
     [App\Http\Controllers\Admin\PublisherController::class, 'view'])
     ->name('admin.publisher.view');
 
+    Route::get('/publisher/edit/{publisher}', 
+    [App\Http\Controllers\Admin\PublisherController::class, 'edit'])
+    ->name('admin.publisher.edit');
+
+    Route::post('/publisher/store', 
+    [App\Http\Controllers\Admin\PublisherController::class, 'store'])
+    ->name('admin.publisher.store');
+
+    Route::put('/publisher/update/{publisher}', 
+    [App\Http\Controllers\Admin\PublisherController::class, 'update'])
+    ->name('admin.publisher.update');
+
+    Route::delete('/publisher/delete/{publisher}', 
+    [App\Http\Controllers\Admin\PublisherController::class, 'destroy'])
+    ->name('admin.publisher.delete');
+
     // Category Routes
     Route::get('/category', 
     [App\Http\Controllers\Admin\CategoryController::class, 'index'])

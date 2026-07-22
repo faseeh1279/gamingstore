@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Create Publisher')
+@section('title', 'Edit Publisher')
 
 @section('content')
 
@@ -11,7 +11,9 @@
         <div class="card-header d-flex justify-content-between align-items-center">
 
             <h4 class="mb-0">
-                Create Publisher
+
+                Edit Publisher
+
             </h4>
 
             <a
@@ -29,31 +31,38 @@
         <div class="card-body">
 
             <form
-                action="{{ route('admin.publisher.store') }}"
+                action="{{ route('admin.publisher.update', $publisher) }}"
                 method="POST"
                 enctype="multipart/form-data">
 
                 @csrf
+                @method('PUT')
 
                 {{-- Name --}}
                 <div class="mb-3">
 
                     <label class="form-label">
+
                         Publisher Name
+
                         <span class="text-danger">*</span>
+
                     </label>
 
                     <input
                         type="text"
                         name="name"
-                        value="{{ old('name') }}"
-                        class="form-control @error('name') is-invalid @enderror"
-                        placeholder="Enter publisher name">
+                        value="{{ old('name', $publisher->name) }}"
+                        class="form-control @error('name') is-invalid @enderror">
 
                     @error('name')
+
                         <div class="invalid-feedback">
+
                             {{ $message }}
+
                         </div>
+
                     @enderror
 
                 </div>
@@ -62,20 +71,25 @@
                 <div class="mb-3">
 
                     <label class="form-label">
+
                         Website
+
                     </label>
 
                     <input
                         type="url"
                         name="website"
-                        value="{{ old('website') }}"
-                        class="form-control @error('website') is-invalid @enderror"
-                        placeholder="https://example.com">
+                        value="{{ old('website', $publisher->website) }}"
+                        class="form-control @error('website') is-invalid @enderror">
 
                     @error('website')
+
                         <div class="invalid-feedback">
+
                             {{ $message }}
+
                         </div>
+
                     @enderror
 
                 </div>
@@ -84,28 +98,57 @@
                 <div class="mb-3">
 
                     <label class="form-label">
+
                         Description
+
                     </label>
 
                     <textarea
-                        name="description"
                         rows="5"
-                        class="form-control @error('description') is-invalid @enderror"
-                        placeholder="Enter publisher description">{{ old('description') }}</textarea>
+                        name="description"
+                        class="form-control @error('description') is-invalid @enderror">{{ old('description', $publisher->description) }}</textarea>
 
                     @error('description')
+
                         <div class="invalid-feedback">
+
                             {{ $message }}
+
                         </div>
+
                     @enderror
 
                 </div>
 
-                {{-- Logo --}}
+                {{-- Current Logo --}}
+                @if($publisher->logo)
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+
+                            Current Logo
+
+                        </label>
+
+                        <br>
+
+                        <img
+                            src="{{ asset('storage/'.$publisher->logo) }}"
+                            class="img-thumbnail"
+                            style="max-height:180px;">
+
+                    </div>
+
+                @endif
+
+                {{-- Change Logo --}}
                 <div class="mb-3">
 
                     <label class="form-label">
-                        Logo
+
+                        Change Logo
+
                     </label>
 
                     <input
@@ -114,9 +157,13 @@
                         class="form-control @error('logo') is-invalid @enderror">
 
                     @error('logo')
+
                         <div class="invalid-feedback">
+
                             {{ $message }}
+
                         </div>
+
                     @enderror
 
                 </div>
@@ -130,7 +177,7 @@
                         id="is_active"
                         name="is_active"
                         value="1"
-                        {{ old('is_active', true) ? 'checked' : '' }}>
+                        {{ old('is_active', $publisher->is_active) ? 'checked' : '' }}>
 
                     <label
                         class="form-check-label"
@@ -146,9 +193,9 @@
                     type="submit"
                     class="btn btn-primary">
 
-                    <i class="bi bi-save me-1"></i>
+                    <i class="bi bi-check-circle me-1"></i>
 
-                    Save Publisher
+                    Update Publisher
 
                 </button>
 
