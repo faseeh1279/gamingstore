@@ -145,23 +145,23 @@ Route::prefix('admin')->group(function(){
     [App\Http\Controllers\Admin\DeveloperController::class, 'create'])
     ->name('admin.developer.create');
 
-    Route::get('/developer/view/{developer}', 
+    Route::get('/developers/view/{developer}', 
     [App\Http\Controllers\Admin\DeveloperController::class, 'view'])
     ->name('admin.developer.view');
 
-    Route::post('/developer/store', 
+    Route::post('/developers/store', 
     [App\Http\Controllers\Admin\DeveloperController::class, 'store'])
     ->name('admin.developer.store');
 
-    Route::get('/developer/edit/{developer}', 
+    Route::get('/developers/edit/{developer}', 
     [App\Http\Controllers\Admin\DeveloperController::class, 'edit'])
     ->name('admin.developer.edit');
 
-    Route::put('/developer/update/{developer}', 
+    Route::put('/developers/update/{developer}', 
     [App\Http\Controllers\Admin\DeveloperController::class, 'update'])
     ->name('admin.developer.update');
 
-    Route::delete('/developer/delete/{developer}', 
+    Route::delete('/developers/delete/{developer}', 
     [App\Http\Controllers\Admin\DeveloperController::class, 'destroy'])
     ->name('admin.developer.delete');
 

@@ -24,7 +24,9 @@ class DocumentController extends Controller
         //     'success' => true,
         //     'data' => $documents
         // ]);
-        return DocumentResource::collection(Document::latest()->get());
+        return DocumentResource::collection(
+            Document::latest()->paginate(10)
+        );
     }
 
     /**
@@ -52,8 +54,6 @@ class DocumentController extends Controller
             'description'=> $request->description, 
             'file'=>$path
         ]); 
-
-
         return new DocumentResource($document); 
     }
 
