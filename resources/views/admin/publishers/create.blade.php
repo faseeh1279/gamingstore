@@ -1,182 +1,164 @@
 @extends('layouts.admin')
 
-@section('title', 'Add CPU')
-@section('page-title', 'Add CPU')
+@section('title', 'Create Publisher')
 
 @section('content')
 
-<div class="container-fluid">
+<div class="container">
 
-    <div class="card shadow-sm border-0">
+    <div class="card shadow">
 
-        <div class="card-header bg-white d-flex justify-content-between align-items-center">
-            <h5 class="mb-0">Add New CPU</h5>
+        <div class="card-header d-flex justify-content-between align-items-center">
 
-            <a href="#" class="btn btn-outline-secondary">
+            <h4 class="mb-0">
+                Create Publisher
+            </h4>
+
+            <a
+                href="{{ route('admin.publisher.index') }}"
+                class="btn btn-secondary">
+
                 <i class="bi bi-arrow-left me-1"></i>
+
                 Back
+
             </a>
+
         </div>
 
         <div class="card-body">
 
-            <form action="#" method="POST">
+            <form
+                action="{{ route('admin.publisher.store') }}"
+                method="POST"
+                enctype="multipart/form-data">
+
                 @csrf
 
-                <div class="row g-3">
+                {{-- Name --}}
+                <div class="mb-3">
 
-                    <div class="col-md-6">
-                        <label class="form-label">
-                            Manufacturer <span class="text-danger">*</span>
-                        </label>
+                    <label class="form-label">
+                        Publisher Name
+                        <span class="text-danger">*</span>
+                    </label>
 
-                        <select
-                            name="manufacturer"
-                            class="form-select"
-                            required>
+                    <input
+                        type="text"
+                        name="name"
+                        value="{{ old('name') }}"
+                        class="form-control @error('name') is-invalid @enderror"
+                        placeholder="Enter publisher name">
 
-                            <option value="">Select Manufacturer</option>
-                            <option value="Intel">Intel</option>
-                            <option value="AMD">AMD</option>
-                        </select>
-                    </div>
-
-                    <div class="col-md-6">
-                        <label class="form-label">
-                            CPU Model <span class="text-danger">*</span>
-                        </label>
-
-                        <input
-                            type="text"
-                            name="model"
-                            class="form-control"
-                            placeholder="Intel Core i7-12700K"
-                            required>
-                    </div>
-
-                    <div class="col-md-4">
-                        <label class="form-label">
-                            Cores
-                        </label>
-
-                        <input
-                            type="number"
-                            name="cores"
-                            class="form-control"
-                            placeholder="8">
-                    </div>
-
-                    <div class="col-md-4">
-                        <label class="form-label">
-                            Threads
-                        </label>
-
-                        <input
-                            type="number"
-                            name="threads"
-                            class="form-control"
-                            placeholder="16">
-                    </div>
-
-                    <div class="col-md-4">
-                        <label class="form-label">
-                            Performance Score <span class="text-danger">*</span>
-                        </label>
-
-                        <input
-                            type="number"
-                            name="score"
-                            class="form-control"
-                            placeholder="29500"
-                            required>
-
-                        <small class="text-muted">
-                            Used for compatibility comparison.
-                        </small>
-                    </div>
-
-                    <div class="col-md-6">
-                        <label class="form-label">
-                            Base Clock (GHz)
-                        </label>
-
-                        <input
-                            type="number"
-                            step="0.1"
-                            name="base_clock"
-                            class="form-control"
-                            placeholder="3.6">
-                    </div>
-
-                    <div class="col-md-6">
-                        <label class="form-label">
-                            Boost Clock (GHz)
-                        </label>
-
-                        <input
-                            type="number"
-                            step="0.1"
-                            name="boost_clock"
-                            class="form-control"
-                            placeholder="5.0">
-                    </div>
-
-                    <div class="col-md-6">
-                        <label class="form-label">
-                            Release Year
-                        </label>
-
-                        <input
-                            type="number"
-                            name="release_year"
-                            class="form-control"
-                            placeholder="2022"
-                            min="1990"
-                            max="{{ date('Y') + 1 }}">
-                    </div>
-
-                    <div class="col-md-6">
-                        <label class="form-label">
-                            Status
-                        </label>
-
-                        <select
-                            name="is_active"
-                            class="form-select">
-
-                            <option value="1" selected>
-                                Active
-                            </option>
-
-                            <option value="0">
-                                Inactive
-                            </option>
-
-                        </select>
-                    </div>
+                    @error('name')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
 
                 </div>
 
-                <div class="mt-4">
+                {{-- Website --}}
+                <div class="mb-3">
 
-                    <button
-                        type="submit"
-                        class="btn btn-primary">
+                    <label class="form-label">
+                        Website
+                    </label>
 
-                        <i class="bi bi-check-circle me-1"></i>
-                        Save CPU
+                    <input
+                        type="url"
+                        name="website"
+                        value="{{ old('website') }}"
+                        class="form-control @error('website') is-invalid @enderror"
+                        placeholder="https://example.com">
 
-                    </button>
-
-                    <a
-                        href="#"
-                        class="btn btn-secondary">
-
-                        Cancel
-
-                    </a>
+                    @error('website')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
 
                 </div>
+
+                {{-- Description --}}
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Description
+                    </label>
+
+                    <textarea
+                        name="description"
+                        rows="5"
+                        class="form-control @error('description') is-invalid @enderror"
+                        placeholder="Enter publisher description">{{ old('description') }}</textarea>
+
+                    @error('description')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+
+                </div>
+
+                {{-- Logo --}}
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Logo
+                    </label>
+
+                    <input
+                        type="file"
+                        name="logo"
+                        class="form-control @error('logo') is-invalid @enderror">
+
+                    @error('logo')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+
+                </div>
+
+                {{-- Status --}}
+                <div class="form-check form-switch mb-4">
+
+                    <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="is_active"
+                        name="is_active"
+                        value="1"
+                        {{ old('is_active', true) ? 'checked' : '' }}>
+
+                    <label
+                        class="form-check-label"
+                        for="is_active">
+
+                        Active Publisher
+
+                    </label>
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="btn btn-primary">
+
+                    <i class="bi bi-save me-1"></i>
+
+                    Save Publisher
+
+                </button>
+
+                <a
+                    href="{{ route('admin.publisher.index') }}"
+                    class="btn btn-secondary">
+
+                    Cancel
+
+                </a>
 
             </form>
 

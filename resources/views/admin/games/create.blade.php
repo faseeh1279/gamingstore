@@ -7,471 +7,439 @@
     <div class="card shadow-sm border-0">
 
         <div class="card-header bg-white">
-            <h5 class="mb-0">Add New Game</h5>
+            <h4 class="mb-0">
+                Add New Game
+            </h4>
         </div>
 
         <div class="card-body">
 
-            <form action="#" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.games.store') }}"
+                  method="POST"
+                  enctype="multipart/form-data">
 
                 @csrf
 
-                <div class="row g-4">
-
-                    {{-- LEFT SIDE: main fields --}}
+                <div class="row">
+                    {{-- LEFT COLUMN --}}
                     <div class="col-lg-8">
 
                         <div class="row g-3">
 
+                            {{-- Game Title --}}
                             <div class="col-md-6">
-                                <label class="form-label">Game Name</label>
-                                <input type="text"
-                                       name="name"
-                                       class="form-control"
-                                       placeholder="Enter game name">
+
+                                <label class="form-label">
+                                    Game Title
+                                    <span class="text-danger">*</span>
+                                </label>
+
+                                <input
+                                    type="text"
+                                    name="title"
+                                    value="{{ old('title') }}"
+                                    class="form-control @error('title') is-invalid @enderror"
+                                    placeholder="Enter game title">
+
+                                @error('title')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+
                             </div>
 
-
+                            {{-- Category --}}
                             <div class="col-md-6">
-                                <label class="form-label">Slug</label>
-                                <input type="text"
-                                       name="slug"
-                                       class="form-control"
-                                       placeholder="game-slug">
-                            </div>
 
+                                <label class="form-label">
+                                    Category
+                                </label>
 
-                            <div class="col-md-6">
-                                <label class="form-label">Category</label>
+                                <select
+                                    name="category_id"
+                                    class="form-select @error('category_id') is-invalid @enderror"
+                                    data-live-search="true"
+                                    >
 
-                                <select name="category_id"
-                                        class="form-select">
-
-                                    <option selected>
+                                    <option value="">
                                         Select Category
                                     </option>
 
-                                    <option value="1">
-                                        Action
-                                    </option>
+                                    @foreach($categories as $category)
 
-                                    <option value="2">
-                                        Adventure
-                                    </option>
+                                        <option
+                                            value="{{ $category->id }}"
+                                            {{ old('category_id') == $category->id ? 'selected' : '' }}>
+
+                                            {{ $category->name }}
+
+                                        </option>
+
+                                    @endforeach
 
                                 </select>
 
+                                @error('category_id')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+
                             </div>
 
-
+                            {{-- Developer --}}
                             <div class="col-md-6">
-                                <label class="form-label">Developer</label>
 
-                                <select name="developer_id"
-                                        class="form-select">
+                                <label class="form-label">
+                                    Developer
+                                </label>
 
-                                    <option selected>
+                                <select
+                                    name="developer_id"
+                                    class="form-select @error('developer_id') is-invalid @enderror">
+
+                                    <option value="">
                                         Select Developer
                                     </option>
 
+                                    @foreach($developers as $developer)
+
+                                        <option
+                                            value="{{ $developer->id }}"
+                                            {{ old('developer_id') == $developer->id ? 'selected' : '' }}>
+
+                                            {{ $developer->name }}
+
+                                        </option>
+
+                                    @endforeach
+
                                 </select>
+
+                                @error('developer_id')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
 
                             </div>
 
-
+                            {{-- Publisher --}}
                             <div class="col-md-6">
-                                <label class="form-label">Publisher</label>
 
-                                <select name="publisher_id"
-                                        class="form-select">
+                                <label class="form-label">
+                                    Publisher
+                                </label>
 
-                                    <option selected>
+                                <select
+                                    name="publisher_id"
+                                    class="form-select @error('publisher_id') is-invalid @enderror">
+
+                                    <option value="">
                                         Select Publisher
                                     </option>
 
+                                    @foreach($publishers as $publisher)
+
+                                        <option
+                                            value="{{ $publisher->id }}"
+                                            {{ old('publisher_id') == $publisher->id ? 'selected' : '' }}>
+
+                                            {{ $publisher->name }}
+
+                                        </option>
+
+                                    @endforeach
+
                                 </select>
+
+                                @error('publisher_id')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
 
                             </div>
 
-
+                            {{-- Platform --}}
                             <div class="col-md-6">
-                                <label class="form-label">Platform</label>
 
-                                <select name="platform_id"
-                                        class="form-select">
+                                <label class="form-label">
+                                    Platform
+                                </label>
 
-                                    <option selected>
+                                <select
+                                    name="platform_id"
+                                    class="form-select @error('platform_id') is-invalid @enderror">
+
+                                    <option value="">
                                         Select Platform
                                     </option>
 
+                                    @foreach($platforms as $platform)
+
+                                        <option
+                                            value="{{ $platform->id }}"
+                                            {{ old('platform_id') == $platform->id ? 'selected' : '' }}>
+
+                                            {{ $platform->name }}
+
+                                        </option>
+
+                                    @endforeach
+
                                 </select>
 
-                            </div>
-
-
-                            <div class="col-md-6">
-                                <label class="form-label">Release Date</label>
-
-                                <input type="date"
-                                       name="release_date"
-                                       class="form-control">
+                                @error('platform_id')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
 
                             </div>
 
-
+                            {{-- Release Date --}}
                             <div class="col-md-6">
-                                <label class="form-label">Price</label>
 
-                                <input type="number"
-                                       name="price"
-                                       class="form-control"
-                                       placeholder="0.00">
+                                <label class="form-label">
+                                    Release Date
+                                </label>
+
+                                <input
+                                    type="date"
+                                    name="release_date"
+                                    value="{{ old('release_date') }}"
+                                    class="form-control @error('release_date') is-invalid @enderror">
+
+                                @error('release_date')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
 
                             </div>
 
+                            {{-- Official Website --}}
+                            <div class="col-12">
 
-                            <div class="col-md-6">
+                                <label class="form-label">
+                                    Official Website
+                                </label>
+
+                                <input
+                                    type="url"
+                                    name="official_website"
+                                    value="{{ old('official_website') }}"
+                                    class="form-control @error('official_website') is-invalid @enderror"
+                                    placeholder="https://example.com">
+
+                                @error('official_website')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+
+                            </div>
+
+                            {{-- Tags --}}
+                            <div class="col-12">
+
                                 <label class="form-label">
                                     Tags
                                 </label>
 
-                                <select class="form-select"
-                                        name="tags[]"
-                                        multiple>
+                                <select
+                                    name="tags[]"
+                                    multiple
+                                    class="form-select @error('tags') is-invalid @enderror"
+                                    size="6">
 
-                                    <option>
-                                        Multiplayer
-                                    </option>
+                                    @foreach($tags as $tag)
 
-                                    <option>
-                                        RPG
-                                    </option>
+                                        <option
+                                            value="{{ $tag->id }}"
+                                            {{ collect(old('tags'))->contains($tag->id) ? 'selected' : '' }}>
 
-                                    <option>
-                                        Strategy
-                                    </option>
+                                            {{ $tag->name }}
+
+                                        </option>
+
+                                    @endforeach
 
                                 </select>
 
+                                @error('tags')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+
                             </div>
 
-
+                            {{-- Description --}}
                             <div class="col-12">
 
                                 <label class="form-label">
                                     Description
                                 </label>
 
-                                <textarea name="description"
-                                          rows="5"
-                                          class="form-control"
-                                          placeholder="Enter game description"></textarea>
+                                <textarea
+                                    rows="6"
+                                    name="description"
+                                    class="form-control @error('description') is-invalid @enderror"
+                                    placeholder="Write game description...">{{ old('description') }}</textarea>
+
+                                @error('description')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
 
                             </div>
 
+                            {{-- Active --}}
+                            <div class="col-12">
 
-                            {{-- Requirements Dropdown --}}
+                                <div class="form-check">
 
-                            <div class="col-12 mt-4">
+                                    <input
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        value="1"
+                                        id="is_active"
+                                        name="is_active"
+                                        {{ old('is_active', true) ? 'checked' : '' }}>
 
-                                <div class="accordion" id="requirementsAccordion">
+                                    <label
+                                        class="form-check-label"
+                                        for="is_active">
 
+                                        Active
 
-                                    {{-- Minimum Requirements --}}
-
-                                    <div class="accordion-item">
-
-                                        <h2 class="accordion-header">
-
-                                            <button class="accordion-button collapsed"
-                                                    type="button"
-                                                    data-bs-toggle="collapse"
-                                                    data-bs-target="#minimumRequirements">
-
-                                                Minimum Requirements
-
-                                            </button>
-
-                                        </h2>
-
-
-                                        <div id="minimumRequirements"
-                                             class="accordion-collapse collapse"
-                                             data-bs-parent="#requirementsAccordion">
-
-
-                                            <div class="accordion-body">
-
-
-                                                <div class="row g-3">
-
-
-                                                    <div class="col-md-6">
-
-                                                        <label class="form-label">
-                                                            CPU
-                                                        </label>
-
-                                                        <select name="minimum_cpu_id"
-                                                                class="form-select">
-
-                                                            <option>
-                                                                Select CPU
-                                                            </option>
-
-                                                        </select>
-
-                                                    </div>
-
-
-                                                    <div class="col-md-6">
-
-                                                        <label class="form-label">
-                                                            GPU
-                                                        </label>
-
-                                                        <select name="minimum_gpu_id"
-                                                                class="form-select">
-
-                                                            <option>
-                                                                Select GPU
-                                                            </option>
-
-                                                        </select>
-
-                                                    </div>
-
-
-                                                    <div class="col-md-6">
-
-                                                        <label class="form-label">
-                                                            RAM
-                                                        </label>
-
-                                                        <input type="text"
-                                                               name="minimum_ram"
-                                                               class="form-control"
-                                                               placeholder="8GB">
-
-                                                    </div>
-
-
-                                                    <div class="col-md-6">
-
-                                                        <label class="form-label">
-                                                            Storage
-                                                        </label>
-
-                                                        <input type="text"
-                                                               name="minimum_storage"
-                                                               class="form-control"
-                                                               placeholder="100GB">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-
-                                    {{-- Recommended Requirements --}}
-
-                                    <div class="accordion-item">
-
-
-                                        <h2 class="accordion-header">
-
-                                            <button class="accordion-button collapsed"
-                                                    type="button"
-                                                    data-bs-toggle="collapse"
-                                                    data-bs-target="#recommendedRequirements">
-
-                                                Recommended Requirements
-
-                                            </button>
-
-                                        </h2>
-
-
-
-                                        <div id="recommendedRequirements"
-                                             class="accordion-collapse collapse"
-                                             data-bs-parent="#requirementsAccordion">
-
-
-                                            <div class="accordion-body">
-
-
-                                                <div class="row g-3">
-
-
-                                                    <div class="col-md-6">
-
-                                                        <label class="form-label">
-                                                            CPU
-                                                        </label>
-
-                                                        <select name="recommended_cpu_id"
-                                                                class="form-select">
-
-                                                            <option>
-                                                                Select CPU
-                                                            </option>
-
-                                                        </select>
-
-                                                    </div>
-
-
-
-                                                    <div class="col-md-6">
-
-                                                        <label class="form-label">
-                                                            GPU
-                                                        </label>
-
-                                                        <select name="recommended_gpu_id"
-                                                                class="form-select">
-
-                                                            <option>
-                                                                Select GPU
-                                                            </option>
-
-                                                        </select>
-
-                                                    </div>
-
-
-
-                                                    <div class="col-md-6">
-
-                                                        <label class="form-label">
-                                                            RAM
-                                                        </label>
-
-                                                        <input type="text"
-                                                               name="recommended_ram"
-                                                               class="form-control"
-                                                               placeholder="16GB">
-
-                                                    </div>
-
-
-
-                                                    <div class="col-md-6">
-
-                                                        <label class="form-label">
-                                                            Storage
-                                                        </label>
-
-                                                        <input type="text"
-                                                               name="recommended_storage"
-                                                               class="form-control"
-                                                               placeholder="150GB SSD">
-
-                                                    </div>
-
-
-
-                                                    <div class="col-md-6">
-
-                                                        <label class="form-label">
-                                                            Operating System
-                                                        </label>
-
-                                                        <select name="recommended_os"
-                                                                class="form-select">
-
-                                                            <option>
-                                                                Windows 10 64-bit
-                                                            </option>
-
-                                                            <option>
-                                                                Windows 11 64-bit
-                                                            </option>
-
-                                                        </select>
-
-                                                    </div>
-
-
-
-                                                    <div class="col-md-6">
-
-                                                        <label class="form-label">
-                                                            DirectX Version
-                                                        </label>
-
-                                                        <input type="text"
-                                                               name="recommended_directx"
-                                                               class="form-control"
-                                                               placeholder="DirectX 12">
-
-                                                    </div>
-
-
-                                                </div>
-
-
-                                            </div>
-
-
-                                        </div>
-
-
-                                    </div>
-
+                                    </label>
 
                                 </div>
 
                             </div>
+                        </div> {{-- End row g-3 --}}
+                    </div> {{-- End col-lg-8 --}}
 
-                        </div>
-
-                    </div>
-
-
-                    {{-- RIGHT SIDE: cover image upload + live preview --}}
+                    {{-- RIGHT COLUMN --}}
                     <div class="col-lg-4">
 
-                        <div class="card border-0 shadow-sm sticky-top" style="top: 1rem;">
+                        <div class="sticky-top" style="top:20px;">
 
-                            <div class="card-header bg-white">
-                                <h6 class="mb-0">Cover Image</h6>
-                            </div>
+                            {{-- Cover Image --}}
+                            <div class="card shadow-sm border-0 mb-4">
 
-                            <div class="card-body text-center">
+                                <div class="card-header bg-white">
+                                    <h6 class="mb-0">
+                                        Cover Image
+                                    </h6>
+                                </div>
 
-                                <div id="imagePreviewWrapper"
-                                     class="d-flex align-items-center justify-content-center mb-3 border rounded bg-light p-2"
-                                     style="height: 260px; overflow: hidden;">
+                                <div class="card-body">
 
-                                    <img id="imagePreview"
-                                         src=""
-                                         alt="Cover preview"
-                                         class="d-none"
-                                         style="max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain;">
+                                    <div
+                                        class="border rounded bg-light d-flex justify-content-center align-items-center mb-3"
+                                        style="height:280px;">
 
-                                    <span id="imagePreviewPlaceholder" class="text-muted small">
-                                        No image selected
-                                    </span>
+                                        <img
+                                            id="coverPreview"
+                                            src=""
+                                            class="img-fluid d-none"
+                                            style="max-height:260px;">
+
+                                        <span
+                                            id="coverPlaceholder"
+                                            class="text-muted">
+
+                                            No Cover Selected
+
+                                        </span>
+
+                                    </div>
+
+                                    <input
+                                        type="file"
+                                        id="coverInput"
+                                        name="cover_image"
+                                        accept="image/*"
+                                        class="form-control @error('cover_image') is-invalid @enderror">
+
+                                    @error('cover_image')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+
+                                    <button
+                                        type="button"
+                                        id="removeCover"
+                                        class="btn btn-outline-danger btn-sm mt-3 d-none">
+
+                                        Remove Cover
+
+                                    </button>
 
                                 </div>
 
-                                <input type="file"
-                                       id="imageInput"
-                                       name="image"
-                                       accept="image/*"
-                                       class="form-control mb-2">
+                            </div>
 
-                                <button type="button"
-                                        id="removeImageBtn"
-                                        class="btn btn-sm btn-outline-danger d-none">
-                                    Remove Image
-                                </button>
+                            {{-- Banner Image --}}
+                            <div class="card shadow-sm border-0">
 
-                                <div class="form-text mt-2">
-                                    Recommended size: 600x800px. JPG, PNG or WEBP.
+                                <div class="card-header bg-white">
+                                    <h6 class="mb-0">
+                                        Banner Image
+                                    </h6>
+                                </div>
+
+                                <div class="card-body">
+
+                                    <div
+                                        class="border rounded bg-light d-flex justify-content-center align-items-center mb-3"
+                                        style="height:180px;">
+
+                                        <img
+                                            id="bannerPreview"
+                                            src=""
+                                            class="img-fluid d-none"
+                                            style="max-height:160px;">
+
+                                        <span
+                                            id="bannerPlaceholder"
+                                            class="text-muted">
+
+                                            No Banner Selected
+
+                                        </span>
+
+                                    </div>
+
+                                    <input
+                                        type="file"
+                                        id="bannerInput"
+                                        name="banner_image"
+                                        accept="image/*"
+                                        class="form-control @error('banner_image') is-invalid @enderror">
+
+                                    @error('banner_image')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+
+                                    <button
+                                        type="button"
+                                        id="removeBanner"
+                                        class="btn btn-outline-danger btn-sm mt-3 d-none">
+
+                                        Remove Banner
+
+                                    </button>
+
                                 </div>
 
                             </div>
@@ -480,75 +448,436 @@
 
                     </div>
 
+                </div>
+
+                <div class="col-12 mt-4">
+
+                    <div class="accordion" id="requirementsAccordion">
+
+                        {{-- Minimum Requirements --}}
+                        <div class="accordion-item">
+
+                            <h2 class="accordion-header">
+
+                                <button
+                                    class="accordion-button"
+                                    type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#minimumRequirements">
+
+                                    Minimum Requirements
+
+                                </button>
+
+                            </h2>
+
+                            <div
+                                id="minimumRequirements"
+                                class="accordion-collapse collapse show"
+                                data-bs-parent="#requirementsAccordion">
+
+                                <div class="accordion-body">
+
+                                    <div class="row g-3">
+
+                                        {{-- CPU --}}
+                                        <div class="col-md-6">
+
+                                            <label class="form-label">
+                                                CPU
+                                            </label>
+
+                                            <select
+                                                name="minimum_cpu_id"
+                                                class="form-select">
+
+                                                <option value="">
+                                                    Select CPU
+                                                </option>
+
+                                                @foreach($cpus as $cpu)
+
+                                                    <option
+                                                        value="{{ $cpu->id }}"
+                                                        {{ old('minimum_cpu_id') == $cpu->id ? 'selected' : '' }}>
+
+                                                        {{ $cpu->model }}
+
+                                                    </option>
+
+                                                @endforeach
+
+                                            </select>
+
+                                        </div>
+
+                                        {{-- GPU --}}
+                                        <div class="col-md-6">
+
+                                            <label class="form-label">
+                                                GPU
+                                            </label>
+
+                                            <select
+                                                name="minimum_gpu_id"
+                                                class="form-select">
+
+                                                <option value="">
+                                                    Select GPU
+                                                </option>
+
+                                                @foreach($gpus as $gpu)
+
+                                                    <option
+                                                        value="{{ $gpu->id }}"
+                                                        {{ old('minimum_gpu_id') == $gpu->id ? 'selected' : '' }}>
+
+                                                        {{ $gpu->model }}
+
+                                                    </option>
+
+                                                @endforeach
+
+                                            </select>
+
+                                        </div>
+
+                                        {{-- RAM --}}
+                                        <div class="col-md-6">
+
+                                            <label class="form-label">
+                                                RAM
+                                            </label>
+
+                                            <input
+                                                type="text"
+                                                name="minimum_ram"
+                                                value="{{ old('minimum_ram') }}"
+                                                class="form-control"
+                                                placeholder="8 GB">
+
+                                        </div>
+
+                                        {{-- Storage --}}
+                                        <div class="col-md-6">
+
+                                            <label class="form-label">
+                                                Storage
+                                            </label>
+
+                                            <input
+                                                type="text"
+                                                name="minimum_storage"
+                                                value="{{ old('minimum_storage') }}"
+                                                class="form-control"
+                                                placeholder="100 GB">
+
+                                        </div>
+
+                                        {{-- Operating System --}}
+                                        <div class="col-md-6">
+
+                                            <label class="form-label">
+                                                Operating System
+                                            </label>
+
+                                            <input
+                                                type="text"
+                                                name="minimum_os"
+                                                value="{{ old('minimum_os') }}"
+                                                class="form-control"
+                                                placeholder="Windows 10 64-bit">
+
+                                        </div>
+
+                                        {{-- DirectX --}}
+                                        <div class="col-md-6">
+
+                                            <label class="form-label">
+                                                DirectX
+                                            </label>
+
+                                            <input
+                                                type="text"
+                                                name="minimum_directx"
+                                                value="{{ old('minimum_directx') }}"
+                                                class="form-control"
+                                                placeholder="DirectX 12">
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        {{-- Recommended Requirements --}}
+                        <div class="accordion-item">
+
+                            <h2 class="accordion-header">
+
+                                <button
+                                    class="accordion-button collapsed"
+                                    type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#recommendedRequirements">
+
+                                    Recommended Requirements
+
+                                </button>
+
+                            </h2>
+
+                            <div
+                                id="recommendedRequirements"
+                                class="accordion-collapse collapse"
+                                data-bs-parent="#requirementsAccordion">
+
+                                <div class="accordion-body">
+
+                                    <div class="row g-3">
+
+                                        {{-- CPU --}}
+                                        <div class="col-md-6">
+
+                                            <label class="form-label">
+                                                CPU
+                                            </label>
+
+                                            <select
+                                                name="recommended_cpu_id"
+                                                class="form-select">
+
+                                                <option value="">
+                                                    Select CPU
+                                                </option>
+
+                                                @foreach($cpus as $cpu)
+
+                                                    <option
+                                                        value="{{ $cpu->id }}"
+                                                        {{ old('recommended_cpu_id') == $cpu->id ? 'selected' : '' }}>
+
+                                                        {{ $cpu->model }}
+
+                                                    </option>
+
+                                                @endforeach
+
+                                            </select>
+
+                                        </div>
+
+                                        {{-- GPU --}}
+                                        <div class="col-md-6">
+
+                                            <label class="form-label">
+                                                GPU
+                                            </label>
+
+                                            <select
+                                                name="recommended_gpu_id"
+                                                class="form-select">
+
+                                                <option value="">
+                                                    Select GPU
+                                                </option>
+
+                                                @foreach($gpus as $gpu)
+
+                                                    <option
+                                                        value="{{ $gpu->id }}"
+                                                        {{ old('recommended_gpu_id') == $gpu->id ? 'selected' : '' }}>
+
+                                                        {{ $gpu->model }}
+
+                                                    </option>
+
+                                                @endforeach
+
+                                            </select>
+
+                                        </div>
+
+                                        {{-- RAM --}}
+                                        <div class="col-md-6">
+
+                                            <label class="form-label">
+                                                RAM
+                                            </label>
+
+                                            <input
+                                                type="text"
+                                                name="recommended_ram"
+                                                value="{{ old('recommended_ram') }}"
+                                                class="form-control"
+                                                placeholder="16 GB">
+
+                                        </div>
+
+                                        {{-- Storage --}}
+                                        <div class="col-md-6">
+
+                                            <label class="form-label">
+                                                Storage
+                                            </label>
+
+                                            <input
+                                                type="text"
+                                                name="recommended_storage"
+                                                value="{{ old('recommended_storage') }}"
+                                                class="form-control"
+                                                placeholder="150 GB SSD">
+
+                                        </div>
+
+                                        {{-- Operating System --}}
+                                        <div class="col-md-6">
+
+                                            <label class="form-label">
+                                                Operating System
+                                            </label>
+
+                                            <input
+                                                type="text"
+                                                name="recommended_os"
+                                                value="{{ old('recommended_os') }}"
+                                                class="form-control"
+                                                placeholder="Windows 11 64-bit">
+
+                                        </div>
+
+                                        {{-- DirectX --}}
+                                        <div class="col-md-6">
+
+                                            <label class="form-label">
+                                                DirectX
+                                            </label>
+
+                                            <input
+                                                type="text"
+                                                name="recommended_directx"
+                                                value="{{ old('recommended_directx') }}"
+                                                class="form-control"
+                                                placeholder="DirectX 12">
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
 
                 </div>
-                <div class="mt-4">
-                    <button type="submit"
-                            class="btn btn-primary">
+
+                {{-- Submit --}}
+                <div class="col-12 mt-4">
+                    <button type="submit" class="btn btn-primary px-4">
                         Save Game
                     </button>
-                    <a href="#"
-                       class="btn btn-secondary">
+                    <a href="{{ route('admin.games.index') }}" class="btn btn-outline-secondary px-4">
                         Cancel
                     </a>
-
                 </div>
-
 
             </form>
 
-
         </div>
+
     </div>
+
 </div>
 
 @push('scripts')
+
 <script>
-    (function () {
-        const imageInput = document.getElementById('imageInput');
-        const imagePreview = document.getElementById('imagePreview');
-        const imagePlaceholder = document.getElementById('imagePreviewPlaceholder');
-        const removeBtn = document.getElementById('removeImageBtn');
 
-        imageInput.addEventListener('change', function (e) {
-            const file = e.target.files[0];
+function previewImage(inputId, previewId, placeholderId, removeBtnId)
+{
+    const input=document.getElementById(inputId);
 
-            if (!file) {
-                resetPreview();
-                return;
-            }
+    const preview=document.getElementById(previewId);
 
-            if (!file.type.startsWith('image/')) {
-                resetPreview();
-                alert('Please select a valid image file.');
-                return;
-            }
+    const placeholder=document.getElementById(placeholderId);
 
-            const reader = new FileReader();
+    const remove=document.getElementById(removeBtnId);
 
-            reader.onload = function (event) {
-                imagePreview.src = event.target.result;
-                imagePreview.classList.remove('d-none');
-                imagePlaceholder.classList.add('d-none');
-                removeBtn.classList.remove('d-none');
-            };
+    input.addEventListener('change',function(){
 
-            reader.readAsDataURL(file);
-        });
+        const file=this.files[0];
 
-        removeBtn.addEventListener('click', function () {
-            imageInput.value = '';
-            resetPreview();
-        });
+        if(!file){
 
-        function resetPreview() {
-            imagePreview.src = '';
-            imagePreview.classList.add('d-none');
-            imagePlaceholder.classList.remove('d-none');
-            removeBtn.classList.add('d-none');
+            reset();
+
+            return;
+
         }
-    })();
+
+        const reader=new FileReader();
+
+        reader.onload=function(e){
+
+            preview.src=e.target.result;
+
+            preview.classList.remove('d-none');
+
+            placeholder.classList.add('d-none');
+
+            remove.classList.remove('d-none');
+
+        }
+
+        reader.readAsDataURL(file);
+
+    });
+
+    remove.addEventListener('click',function(){
+
+        input.value='';
+
+        reset();
+
+    });
+
+    function reset(){
+
+        preview.src='';
+
+        preview.classList.add('d-none');
+
+        placeholder.classList.remove('d-none');
+
+        remove.classList.add('d-none');
+
+    }
+
+}
+
+previewImage(
+    'coverInput',
+    'coverPreview',
+    'coverPlaceholder',
+    'removeCover'
+);
+
+previewImage(
+    'bannerInput',
+    'bannerPreview',
+    'bannerPlaceholder',
+    'removeBanner'
+);
+
 </script>
+
 @endpush
 
 @endsection

@@ -165,7 +165,6 @@
                     <span>Hardware</span>
 
                     <i class="bi bi-chevron-down arrow"></i>
-
                 </a>
 
            <ul id="hardwareMenu" class="collapse {{ request()->routeIs('admin.hardware.*') ? 'show' : '' }} submenu">
@@ -186,15 +185,31 @@
         </li>
 
         <!-- Tags -->
-        {{-- <li class="menu-item">
-            <a href="#" class="menu-link">
+        <li class="menu-item">
+            <a href="#tagsMenu" class="menu-link {{ request()->routeIs('admin.tags.*') ? '' : 'collapsed' }}"
+                data-bs-toggle="collapse">
                 <i class="bi bi-tags"></i>
-
                 <span>
                     Tags
-                </span>
+                </span> 
+                <i class="bi bi-chevron-down arrow"></i>
             </a>
-        </li> --}}
+            <ul id="tagsMenu" class="collapse {{ request()->routeIs('admin.tags.*') ? 'show' : '' }} submenu">
+                <li>
+                    <a href="{{ route('admin.tags.index') }}" class="submenu-link {{ request()->routeIs('admin.tags.index') ? 'active' : '' }}">
+                        <i class="bi bi-cpu"></i>
+                        <span>All Tags</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ route('admin.tags.create') }}" class="submenu-link {{ request()->routeIs('admin.tags.create') ? 'active' : '' }}">
+                        <i class="bi bi-nvidia"></i>
+                        <span>Add Tag</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
 
         <!-- News -->
         {{-- <li class="menu-item">

@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Edit Developer')
+@section('title', 'Edit Publisher')
 
 @section('content')
 
@@ -11,12 +11,16 @@
         <div class="card-header d-flex justify-content-between align-items-center">
 
             <h4 class="mb-0">
-                Edit Developer
+
+                Edit Publisher
+
             </h4>
 
             <a
-                href="{{ route('admin.developer.index') }}"
+                href="{{ route('admin.publisher.index') }}"
                 class="btn btn-secondary">
+
+                <i class="bi bi-arrow-left me-1"></i>
 
                 Back
 
@@ -27,7 +31,7 @@
         <div class="card-body">
 
             <form
-                action="{{ route('admin.developer.update', $developer) }}"
+                action="{{ route('admin.publisher.update', $publisher) }}"
                 method="POST"
                 enctype="multipart/form-data">
 
@@ -35,12 +39,11 @@
                 @method('PUT')
 
                 {{-- Name --}}
-
                 <div class="mb-3">
 
                     <label class="form-label">
 
-                        Name
+                        Publisher Name
 
                         <span class="text-danger">*</span>
 
@@ -49,7 +52,7 @@
                     <input
                         type="text"
                         name="name"
-                        value="{{ old('name', $developer->name) }}"
+                        value="{{ old('name', $publisher->name) }}"
                         class="form-control @error('name') is-invalid @enderror">
 
                     @error('name')
@@ -64,35 +67,7 @@
 
                 </div>
 
-                {{-- Description --}}
-
-                <div class="mb-3">
-
-                    <label class="form-label">
-
-                        Description
-
-                    </label>
-
-                    <textarea
-                        name="description"
-                        rows="4"
-                        class="form-control @error('description') is-invalid @enderror">{{ old('description', $developer->description) }}</textarea>
-
-                    @error('description')
-
-                        <div class="invalid-feedback">
-
-                            {{ $message }}
-
-                        </div>
-
-                    @enderror
-
-                </div>
-
                 {{-- Website --}}
-
                 <div class="mb-3">
 
                     <label class="form-label">
@@ -104,7 +79,7 @@
                     <input
                         type="url"
                         name="website"
-                        value="{{ old('website', $developer->website) }}"
+                        value="{{ old('website', $publisher->website) }}"
                         class="form-control @error('website') is-invalid @enderror">
 
                     @error('website')
@@ -119,11 +94,34 @@
 
                 </div>
 
-                
+                {{-- Description --}}
+                <div class="mb-3">
+
+                    <label class="form-label">
+
+                        Description
+
+                    </label>
+
+                    <textarea
+                        rows="5"
+                        name="description"
+                        class="form-control @error('description') is-invalid @enderror">{{ old('description', $publisher->description) }}</textarea>
+
+                    @error('description')
+
+                        <div class="invalid-feedback">
+
+                            {{ $message }}
+
+                        </div>
+
+                    @enderror
+
+                </div>
 
                 {{-- Current Logo --}}
-
-                @if($developer->logo)
+                @if($publisher->logo)
 
                     <div class="mb-3">
 
@@ -136,16 +134,15 @@
                         <br>
 
                         <img
-                            src="{{ asset('storage/'.$developer->logo) }}"
+                            src="{{ asset('storage/'.$publisher->logo) }}"
                             class="img-thumbnail"
-                            style="max-height:180px">
+                            style="max-height:180px;">
 
                     </div>
 
                 @endif
 
-                {{-- New Logo --}}
-
+                {{-- Change Logo --}}
                 <div class="mb-3">
 
                     <label class="form-label">
@@ -171,8 +168,7 @@
 
                 </div>
 
-                {{-- Active --}}
-
+                {{-- Status --}}
                 <div class="form-check form-switch mb-4">
 
                     <input
@@ -181,13 +177,13 @@
                         id="is_active"
                         name="is_active"
                         value="1"
-                        {{ old('is_active', $developer->is_active) ? 'checked' : '' }}>
+                        {{ old('is_active', $publisher->is_active) ? 'checked' : '' }}>
 
                     <label
                         class="form-check-label"
                         for="is_active">
 
-                        Active Developer
+                        Active Publisher
 
                     </label>
 
@@ -199,12 +195,12 @@
 
                     <i class="bi bi-check-circle me-1"></i>
 
-                    Update Developer
+                    Update Publisher
 
                 </button>
 
                 <a
-                    href="{{ route('admin.developer.index') }}"
+                    href="{{ route('admin.publisher.index') }}"
                     class="btn btn-secondary">
 
                     Cancel

@@ -50,7 +50,7 @@
                          style="max-height:250px; object-fit:cover;">
 
                     <h4 class="fw-bold">
-                        Cyber Adventure
+                        {{ $game->title }}
                     </h4>
 
                     <span class="badge bg-primary">
@@ -92,7 +92,7 @@
                             </label>
 
                             <h6>
-                                Cyber Adventure
+                                {{ $game->title }}
                             </h6>
 
                         </div>
@@ -120,7 +120,7 @@
                             </label>
 
                             <h6>
-                                Rockstar Games
+                                {{ $game->developer->name }}
                             </h6>
 
                         </div>
@@ -134,7 +134,7 @@
                             </label>
 
                             <h6>
-                                Rockstar Publishing
+                                {{ $game->publisher->name }}
                             </h6>
 
                         </div>
@@ -181,8 +181,7 @@
 
 
                     <p class="text-muted">
-                        An open world adventure game where players explore
-                        futuristic cities, complete missions and battle enemies.
+                        {{ $game->description }}
                     </p>
 
 
@@ -230,7 +229,7 @@
 
                             CPU
                             <strong>
-                                Intel Core i5
+                                {{ $game->minimumRequirement->cpu->model }}
                             </strong>
 
                         </li>
@@ -240,7 +239,7 @@
 
                             GPU
                             <strong>
-                                GTX 1060
+                                {{ $game->minimumRequirement->gpu->model }}
                             </strong>
 
                         </li>
@@ -250,7 +249,7 @@
 
                             RAM
                             <strong>
-                                8GB
+                                {{ $game->minimumRequirement->ram }}
                             </strong>
 
                         </li>
@@ -260,7 +259,7 @@
 
                             Storage
                             <strong>
-                                100GB
+                                {{ $game->minimumRequirement->storage }}
                             </strong>
 
                         </li>
@@ -311,7 +310,7 @@
 
                             CPU
                             <strong>
-                                Intel Core i7
+                                {{ $game->recommendedRequirement->cpu->model }}
                             </strong>
 
                         </li>
@@ -321,7 +320,7 @@
 
                             GPU
                             <strong>
-                                RTX 3070
+                                {{ $game->recommendedRequirement->gpu->model }}
                             </strong>
 
                         </li>
@@ -331,7 +330,7 @@
 
                             RAM
                             <strong>
-                                16GB
+                                {{ $game->recommendedRequirement->ram }}
                             </strong>
 
                         </li>
@@ -341,7 +340,7 @@
 
                             Storage
                             <strong>
-                                150GB SSD
+                                {{ $game->recommendedRequirement->storage }}
                             </strong>
 
                         </li>

@@ -16,4 +16,9 @@ class Publisher extends Model
         'description',
         'is_active',
     ];
+
+    public function games()
+    {
+        return $this->hasMany(Game::class);
+    }
 }
