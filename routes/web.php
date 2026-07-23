@@ -75,7 +75,9 @@ Route::view('/contact','frontend.contact')
 
 
 // Admin Routes 
-Route::prefix('admin')->group(function(){ 
+Route::middleware(['auth', 'admin'])
+    ->prefix('admin')
+    ->group(function () {
 
     Route::get('/', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('admin.dashboard.index'); 
 
