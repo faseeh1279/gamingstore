@@ -96,7 +96,7 @@
                 class="menu-link {{ request()->routeIs('admin.developers.*') ? '' : 'collapsed' }}"
                 data-bs-toggle="collapse">
 
-                    <i class="bi bi-grid"></i>
+                    <i class="bi bi-code-square"></i>
 
                     <span>Developers</span>
 
@@ -197,14 +197,14 @@
             <ul id="tagsMenu" class="collapse {{ request()->routeIs('admin.tags.*') ? 'show' : '' }} submenu">
                 <li>
                     <a href="{{ route('admin.tags.index') }}" class="submenu-link {{ request()->routeIs('admin.tags.index') ? 'active' : '' }}">
-                        <i class="bi bi-cpu"></i>
+                        <i class="bi bi-list-task"></i>
                         <span>All Tags</span>
                     </a>
                 </li>
 
                 <li>
                     <a href="{{ route('admin.tags.create') }}" class="submenu-link {{ request()->routeIs('admin.tags.create') ? 'active' : '' }}">
-                        <i class="bi bi-nvidia"></i>
+                        <i class="bi bi-plus-circle-fill"></i>
                         <span>Add Tag</span>
                     </a>
                 </li>
