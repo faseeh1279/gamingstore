@@ -1,58 +1,419 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🎮 GamingStore
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+GamingStore is a modern Laravel-based game management system that allows administrators to manage games, developers, publishers, categories, platforms, hardware requirements, and tags from an intuitive admin dashboard.
 
-## About Laravel
+The project is designed with scalability in mind and serves as a foundation for a complete game catalog and PC compatibility platform similar to Steam or PCGameBenchmark.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+# Features
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Authentication
 
-## Learning Laravel
+- Admin Login
+- Secure Authentication
+- Protected Admin Routes
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+---
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Dashboard
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+- Total Games
+- Categories
+- Developers
+- Publishers
+- Platforms
+- Active / Inactive Games
+- Statistics Cards
 
-## Agentic Development
+---
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+## Game Management
+
+- Create Game
+- Update Game
+- Delete Game
+- View Game Details
+- Upload Cover Image
+- Upload Banner Image
+- Game Description
+- Official Website
+- Release Date
+- Active / Inactive Status
+
+---
+
+## Categories
+
+- Create Category
+- Update Category
+- Delete Category
+- Category Icons
+- Category Description
+
+---
+
+## Developers
+
+- Create Developer
+- Edit Developer
+- Delete Developer
+- Company Website
+- Logo Upload
+
+---
+
+## Publishers
+
+- Create Publisher
+- Edit Publisher
+- Delete Publisher
+
+---
+
+## Platforms
+
+- Windows
+- Linux
+- macOS
+
+(Multiple platforms can be added later.)
+
+---
+
+## CPU Management
+
+Store CPU information including
+
+- Manufacturer
+- Model
+- Cores
+- Threads
+- Base Clock
+- Boost Clock
+- Benchmark Score
+
+---
+
+## GPU Management
+
+Store GPU information including
+
+- Manufacturer
+- Model
+- VRAM
+- Benchmark Score
+
+---
+
+## Game Requirements
+
+### Minimum Requirements
+
+- CPU
+- GPU
+- RAM
+- Storage
+- Operating System
+- DirectX
+- Sound Card
+
+### Recommended Requirements
+
+- CPU
+- GPU
+- RAM
+- Storage
+- Operating System
+- DirectX
+- Sound Card
+
+---
+
+## Tags
+
+Supports many-to-many relationship between Games and Tags.
+
+Examples
+
+- Open World
+- Multiplayer
+- Single Player
+- Horror
+- Fantasy
+- Souls-like
+- RPG
+- Story Rich
+
+---
+
+# Tech Stack
+
+Backend
+
+- Laravel 13
+- PHP 8.3+
+- MySQL
+
+Frontend
+
+- Blade
+- Bootstrap 5
+- Bootstrap Icons
+
+Storage
+
+- Laravel Storage
+
+Development
+
+- Composer
+- Artisan
+- Git
+
+---
+
+# Database Structure
+
+Main Tables
+
+- users
+- games
+- categories
+- developers
+- publishers
+- platforms
+- tags
+- game_tag
+- cpus
+- gpus
+- minimum_requirements
+- recommended_requirements
+
+---
+
+# Relationships
+
+Game
+
+- belongsTo Category
+- belongsTo Developer
+- belongsTo Publisher
+- belongsTo Platform
+
+Game
+
+- belongsToMany Tags
+
+Game
+
+- hasOne MinimumRequirement
+
+Game
+
+- hasOne RecommendedRequirement
+
+MinimumRequirement
+
+- belongsTo CPU
+- belongsTo GPU
+
+RecommendedRequirement
+
+- belongsTo CPU
+- belongsTo GPU
+
+---
+
+# Installation
+
+Clone the repository
 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+git clone https://github.com/yourusername/gamingstore.git
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+Go inside project
 
-## Contributing
+```bash
+cd gamingstore
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Install dependencies
 
-## Code of Conduct
+```bash
+composer install
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Create environment file
 
-## Security Vulnerabilities
+```bash
+cp .env.example .env
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Generate application key
 
-## License
+```bash
+php artisan key:generate
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Configure database in
+
+```
+.env
+```
+
+Run migrations
+
+```bash
+php artisan migrate
+```
+
+Seed database
+
+```bash
+php artisan db:seed
+```
+
+Create storage link
+
+```bash
+php artisan storage:link
+```
+
+Run server
+
+```bash
+php artisan serve
+```
+
+---
+
+# Seeder
+
+The project includes sample data for
+
+- Categories
+- Developers
+- Publishers
+- Platforms
+- CPUs
+- GPUs
+- Tags
+- Games
+
+---
+
+# Folder Structure
+
+```
+app
+ ├── Models
+ ├── Http
+ ├── Services
+ ├── Providers
+
+database
+ ├── migrations
+ ├── seeders
+
+resources
+ ├── views
+ │    ├── admin
+ │    ├── layouts
+
+routes
+ ├── web.php
+
+public
+
+storage
+```
+
+---
+
+# Future Features
+
+- User Accounts
+- Game Reviews
+- Ratings
+- Wishlist
+- Favorites
+- Hardware Compatibility Checker
+- Search
+- Filters
+- API
+- REST API
+- React Frontend
+- Recommendation Engine
+
+---
+
+# Screenshots
+
+Add screenshots here.
+
+Example
+
+```
+docs/screenshots/dashboard.png
+docs/screenshots/games.png
+docs/screenshots/game-view.png
+```
+
+---
+
+# License
+
+This project is developed for educational and portfolio purposes.
+
+```
+
+---
+
+## I also recommend creating a `docs/` folder
+
+Professional projects usually keep documentation separate from the README.
+
+```
+gamingstore
+│
+├── app
+├── bootstrap
+├── config
+├── database
+├── public
+├── resources
+├── routes
+├── storage
+│
+├── docs
+│   ├── 01-Project-Overview.md
+│   ├── 02-System-Architecture.md
+│   ├── 03-Database-Design.md
+│   ├── 04-ERD.md
+│   ├── 05-Installation.md
+│   ├── 06-Features.md
+│   ├── 07-API.md
+│   ├── 08-Coding-Standards.md
+│   ├── 09-Future-Roadmap.md
+│   └── screenshots/
+│
+└── README.md
+```
+
+## Documentation roadmap
+
+Since this is becoming a substantial Laravel project, I'd suggest documenting it in this order:
+
+1. **README.md** — Project overview and setup (start here).
+2. **Project Overview** — Purpose, goals, target users, and scope.
+3. **System Architecture** — High-level architecture, request flow, MVC structure, and component interactions.
+4. **Database Design** — Tables, relationships, and design rationale.
+5. **ER Diagram (ERD)** — Visual entity relationship diagram.
+6. **Features Documentation** — Explain each module (Games, Categories, Developers, Publishers, Platforms, Tags, Requirements).
+7. **Installation & Deployment Guide** — Local setup and production deployment steps.
+8. **Future Roadmap** — Planned features and improvements.
+9. **Developer Guide** — Coding conventions, naming standards, folder organization, and contribution guidelines.
+
+This progression mirrors how many professional software teams structure project documentation and will make your repository much easier to understand and maintain.
