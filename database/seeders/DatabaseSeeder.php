@@ -16,13 +16,21 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // User::factory(10)->create();
-        $this->call([ 
-            AdminSeeder::class, 
-            CategorySeeder::class, 
-            PlatformSeeder::class, 
+       $this->call([
+            AdminSeeder::class,
+
+            CategorySeeder::class,
+            PlatformSeeder::class,
+
+            DeveloperSeeder::class,
+            PublisherSeeder::class,
+
             CpuSeeder::class,
             GpuSeeder::class,
-            CategorySeeder::class
+
+            TagSeeder::class,
+
+            GameSeeder::class,
         ]);
     }
 }
