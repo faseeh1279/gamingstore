@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Models\Game; 
+use App\Models\Cpu; 
+use App\Models\Gpu; 
 
 class RecommendedRequirement extends Model
 {
@@ -23,5 +25,15 @@ class RecommendedRequirement extends Model
     public function game(): BelongsTo
     {
         return $this->belongsTo(Game::class);
+    }
+
+    public function cpu()
+    {
+        return $this->belongsTo(Cpu::class);
+    }
+
+    public function gpu()
+    {
+        return $this->belongsTo(Gpu::class);
     }
 }

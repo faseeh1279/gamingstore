@@ -84,7 +84,24 @@ Route::prefix('admin')->group(function(){
 
     Route::get('/games/create', [App\Http\Controllers\Admin\GameController::class, 'create'])->name('admin.games.create'); 
 
-    Route::get('/games/view', [App\Http\Controllers\Admin\GameController::class, 'view'])->name('admin.games.view'); 
+    Route::get('/games/edit/{game}', [App\Http\Controllers\Admin\GameController::class, 'edit'])->name('admin.games.edit'); 
+
+    Route::put('/games/update', [App\Http\Controllers\Admin\GameController::class, 'viupdateew'])->name('admin.games.update'); 
+
+    Route::post('/games/store', [App\Http\Controllers\Admin\GameController::class, 'store'])->name('admin.games.store'); 
+
+    Route::get('/games/view/{game}', [App\Http\Controllers\Admin\GameController::class, 'view'])->name('admin.games.view'); 
+
+    Route::delete('/games/delete/{game}', [App\Http\Controllers\Admin\GameController::class, 'destroy'])->name('admin.games.delete'); 
+
+    // Tag Routes 
+    Route::get('/tags', [App\Http\Controllers\Admin\TagController::class, 'index'])->name('admin.tags.index');
+    Route::get('/tags/create', [App\Http\Controllers\Admin\TagController::class, 'create'])->name('admin.tags.create');
+    Route::get('/tags/edit/{tag}', [App\Http\Controllers\Admin\TagController::class, 'edit'])->name('admin.tags.edit');
+    Route::put('/tags/update', [App\Http\Controllers\Admin\TagController::class, 'update'])->name('admin.tags.update');
+    Route::post('/tags/store', [App\Http\Controllers\Admin\TagController::class, 'store'])->name('admin.tags.store');
+    Route::get('/tags/view/{tag}', [App\Http\Controllers\Admin\TagController::class, 'show'])->name('admin.tags.view');
+    Route::delete('/tags/delete/{tag}', [App\Http\Controllers\Admin\TagController::class, 'index'])->name('admin.tags.delete');
 
     // Requirement Routes
     Route::get('/requirements', [App\Http\Controllers\Admin\RequirementController::class, 'index'])->name('admin.requirements.index'); 
@@ -128,9 +145,6 @@ Route::prefix('admin')->group(function(){
 
     Route::put('/hardware/gpu/update/{gpu}', [App\Http\Controllers\Admin\Hardware\GpuController::class, 'update'])->name('admin.hardware.gpu.update'); 
 
-
-
-    
     Route::delete('/hardware/gpu/destroy/{gpu}', [App\Http\Controllers\Admin\Hardware\GpuController::class, 'destroy'])->name('admin.hardware.gpu.destroy'); 
 
     

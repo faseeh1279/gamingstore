@@ -4,7 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Game; 
-use Illuminate\Database\Eloquent\Relations\BelongsTo; 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\Cpu; 
+use App\Models\Gpu;  
 
 
 class MinimumRequirement extends Model
@@ -24,5 +26,15 @@ class MinimumRequirement extends Model
     public function game(): BelongsTo
     {
         return $this->belongsTo(Game::class);
+    }
+
+     public function cpu()
+    {
+        return $this->belongsTo(Cpu::class);
+    }
+
+    public function gpu()
+    {
+        return $this->belongsTo(Gpu::class);
     }
 }

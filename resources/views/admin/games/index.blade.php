@@ -1,28 +1,6 @@
 @extends('layouts.admin')
 
-
 @section('content')
-    {{-- <div class="container-fluid">
-        <div class="card shadow-sm border-0 text-center">
-            <div class="card-body py-5">
-                <div class="mb-4">
-                    <i class="bi bi-hourglass-split text-primary" style="font-size: 60px;"></i>
-                </div>
-                <h3 class="fw-bold mb-3">
-                    Feature Coming Soon
-                </h3>
-                <p class="text-muted fs-5 mb-4">
-                    This feature is currently under development and will be available soon.
-                    We are working hard to bring you an improved experience.
-                </p>
-                <span class="badge bg-primary px-3 py-2">
-                    Stay Tuned
-                </span>
-            </div>
-        </div>
-    </div> --}}
-
-
 
 <div class="container-fluid">
 
@@ -47,312 +25,191 @@
     <div class="row g-4 mb-4">
 
         <div class="col-xl-3 col-md-6">
-
             <div class="card shadow-sm border-0">
-
                 <div class="card-body">
-
                     <h6 class="text-muted">Total Games</h6>
-
-                    <h3 class="mb-0">1,250</h3>
-
+                    <h3 class="mb-0">{{ $totalGames }}</h3>
                 </div>
-
             </div>
-
         </div>
 
         <div class="col-xl-3 col-md-6">
-
             <div class="card shadow-sm border-0">
-
                 <div class="card-body">
-
                     <h6 class="text-muted">Published</h6>
-
-                    <h3 class="mb-0 text-success">1,180</h3>
-
+                    <h3 class="mb-0 text-success">{{ $publishedGames }}</h3>
                 </div>
-
             </div>
-
         </div>
 
         <div class="col-xl-3 col-md-6">
-
             <div class="card shadow-sm border-0">
-
                 <div class="card-body">
-
                     <h6 class="text-muted">Draft Games</h6>
-
-                    <h3 class="mb-0 text-warning">70</h3>
-
+                    <h3 class="mb-0 text-warning">{{ $draftGames }}</h3>
                 </div>
-
             </div>
-
         </div>
 
         <div class="col-xl-3 col-md-6">
-
             <div class="card shadow-sm border-0">
-
                 <div class="card-body">
-
                     <h6 class="text-muted">Categories</h6>
-
-                    <h3 class="mb-0">45</h3>
-
+                    <h3 class="mb-0">{{ $categoriesCount }}</h3>
                 </div>
-
             </div>
-
         </div>
 
     </div>
 
-    {{-- Table --}}
+    {{-- Table (desktop) --}}
     <div class="d-none d-lg-block">
         <div class="card shadow-sm border-0">
 
             <div class="card-header bg-white">
-
                 <div class="row g-3 align-items-center">
 
                     <div class="col-md-5">
-
                         <input
                             type="text"
                             class="form-control"
                             placeholder="Search games...">
-
                     </div>
 
                     <div class="col-md-3">
-
                         <select class="form-select">
-
                             <option>All Categories</option>
                             <option>Action</option>
                             <option>Adventure</option>
                             <option>RPG</option>
-
                         </select>
-
                     </div>
 
                     <div class="col-md-2">
-
                         <select class="form-select">
-
                             <option>All Status</option>
                             <option>Published</option>
                             <option>Draft</option>
-
                         </select>
-
                     </div>
 
                     <div class="col-md-2">
-
                         <button class="btn btn-primary w-100">
                             Search
                         </button>
-
                     </div>
 
                 </div>
-
             </div>
 
             <div class="table-responsive">
-
                 <table class="table table-hover align-middle mb-0">
 
                     <thead class="table-light">
-
                         <tr>
-
                             <th>Image</th>
                             <th>Name</th>
                             <th>Category</th>
                             <th>Developer</th>
                             <th>Platform</th>
-                            <th>Price</th>
                             <th>Status</th>
                             <th width="180">Actions</th>
-
                         </tr>
-
                     </thead>
 
                     <tbody>
-
-                        @for($i = 1; $i <= 10; $i++)
-
+                        @forelse($games as $game)
                         <tr>
 
                             <td>
-
-                                <img
-                                    src="https://placehold.co/70x90"
-                                    class="rounded"
-                                    width="60">
-
+                                @if($game->cover_image)
+                                    <img
+                                        src="{{ asset('storage/'.$game->cover_image) }}"
+                                        width="60"
+                                        class="rounded">
+                                @else
+                                    <img
+                                        src="https://placehold.co/70x90"
+                                        width="60"
+                                        class="rounded">
+                                @endif
                             </td>
 
                             <td>
-
-                                <strong>Grand Theft Auto {{ $i }}</strong>
-
+                                <strong>{{ $game->title }}</strong>
                                 <br>
-
                                 <small class="text-muted">
-                                    game-slug-{{ $i }}
+                                    {{ $game->slug }}
                                 </small>
-
                             </td>
 
-                            <td>Action</td>
+                            <td>{{ $game->category->name }}</td>
 
-                            <td>Rockstar Games</td>
+                            <td>{{ $game->publisher->name }}</td>
 
-                            <td>PC</td>
-
-                            <td>$59.99</td>
+                            <td>{{ $game->platform->name }}</td>
 
                             <td>
-
-                                <span class="badge bg-success">
-
-                                    Published
-
-                                </span>
-
+                                @if($game->is_active)
+                                    <span class="badge bg-success">Active</span>
+                                @else
+                                    <span class="badge bg-danger">Inactive</span>
+                                @endif
                             </td>
 
                             <td>
-
                                 <div class="btn-group btn-group-sm">
 
                                     <a
-                                        href="#"
+                                        href="{{ route('admin.games.view', $game) }}"
                                         class="btn btn-outline-primary">
-
                                         <i class="bi bi-eye"></i>
-
                                     </a>
 
                                     <a
-                                        href="#"
+                                        href="{{ route('admin.games.edit', $game) }}"
                                         class="btn btn-outline-warning">
-
                                         <i class="bi bi-pencil"></i>
-
                                     </a>
 
-                                    <button
-                                        class="btn btn-outline-danger">
-
-                                        <i class="bi bi-trash"></i>
-
-                                    </button>
+                                    <form action="{{ route('admin.games.delete', $game) }}" method="post"
+                                          onsubmit="return confirm('Delete this game?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button
+                                            type="submit"
+                                            class="btn btn-outline-danger">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </form>
 
                                 </div>
-
                             </td>
 
                         </tr>
-
-                        @endfor
-
+                        @empty
+                        <tr>
+                            <td colspan="7" class="text-center py-5">
+                                No games found.
+                            </td>
+                        </tr>
+                        @endforelse
                     </tbody>
 
                 </table>
-
             </div>
 
             <div class="card-footer bg-white">
-
                 <div class="d-flex justify-content-between align-items-center">
 
                     <small class="text-muted">
-
-                        Showing 1 to 10 of 1,250 games
-
+                        Showing {{ $games->firstItem() ?? 0 }} to {{ $games->lastItem() ?? 0 }}
+                        of {{ $games->total() }} games
                     </small>
 
-                    <nav>
-
-                        <ul class="pagination pagination-sm mb-0">
-
-                            <li class="page-item disabled">
-
-                                <a class="page-link">
-
-                                    Previous
-
-                                </a>
-
-                            </li>
-
-                            <li class="page-item active">
-
-                                <a class="page-link">
-
-                                    1
-
-                                </a>
-
-                            </li>
-
-                            <li class="page-item">
-
-                                <a class="page-link">
-
-                                    2
-
-                                </a>
-
-                            </li>
-
-                            <li class="page-item">
-
-                                <a class="page-link">
-
-                                    3
-
-                                </a>
-
-                            </li>
-
-                            <li class="page-item">
-
-                                <a class="page-link">
-
-                                    4
-
-                                </a>
-
-                            </li>
-
-                            <li class="page-item">
-
-                                <a class="page-link">
-
-                                    Next
-
-                                </a>
-
-                            </li>
-
-                        </ul>
-
-                    </nav>
+                    {{ $games->links() }}
 
                 </div>
-
             </div>
 
         </div>
@@ -360,7 +217,7 @@
 
     {{-- Responsive Short Screen Display --}}
     <div class="d-lg-none">
-        @for($i = 1; $i <= 10; $i++)
+        @forelse($games as $game)
 
             <div class="card shadow-sm border-0 mb-3">
 
@@ -368,49 +225,58 @@
 
                     <div class="d-flex">
 
-                        <img
-                            src="https://placehold.co/90x120"
-                            class="rounded me-3"
-                            width="80">
+                        @if($game->cover_image)
+                            <img
+                                src="{{ asset('storage/'.$game->cover_image) }}"
+                                class="rounded me-3"
+                                width="80">
+                        @else
+                            <img
+                                src="https://placehold.co/90x120"
+                                class="rounded me-3"
+                                width="80">
+                        @endif
 
                         <div class="flex-grow-1">
 
                             <h5 class="mb-1">
-                                Grand Theft Auto {{ $i }}
+                                {{ $game->title }}
                             </h5>
 
                             <small class="text-muted d-block mb-2">
-                                game-slug-{{ $i }}
+                                {{ $game->slug }}
                             </small>
 
                             <div class="mb-2">
-
                                 <span class="badge bg-success">
-                                    Published
+                                    {{ $game->publisher->name }}
                                 </span>
-
                             </div>
 
                             <div class="row small">
 
                                 <div class="col-6 mb-2">
                                     <strong>Category</strong><br>
-                                    Action
+                                    {{ $game->category->name }}
                                 </div>
 
                                 <div class="col-6 mb-2">
                                     <strong>Platform</strong><br>
-                                    PC
+                                    {{ $game->platform->name }}
                                 </div>
 
                                 <div class="col-6">
                                     <strong>Developer</strong><br>
-                                    Rockstar Games
+                                    {{ $game->developer->name }}
                                 </div>
 
                                 <div class="col-6">
-                                    <strong>Price</strong><br>
-                                    $59.99
+                                    <strong>Status</strong><br>
+                                    @if($game->is_active)
+                                        <span class="badge bg-success">Active</span>
+                                    @else
+                                        <span class="badge bg-danger">Inactive</span>
+                                    @endif
                                 </div>
 
                             </div>
@@ -423,23 +289,29 @@
 
                     <div class="d-flex gap-2">
 
-                        <a href="#"
-                        class="btn btn-outline-primary btn-sm flex-fill">
+                        <a href="{{ route('admin.games.view', $game) }}"
+                           class="btn btn-outline-primary btn-sm flex-fill">
                             <i class="bi bi-eye"></i>
                             View
                         </a>
 
-                        <a href="#"
-                        class="btn btn-outline-warning btn-sm flex-fill">
+                        <a href="{{ route('admin.games.edit', $game) }}"
+                           class="btn btn-outline-warning btn-sm flex-fill">
                             <i class="bi bi-pencil"></i>
                             Edit
                         </a>
 
-                        <button
-                            class="btn btn-outline-danger btn-sm flex-fill">
-                            <i class="bi bi-trash"></i>
-                            Delete
-                        </button>
+                        <form action="{{ route('admin.games.delete', $game) }}" method="post"
+                              class="flex-fill" onsubmit="return confirm('Delete this game?');">
+                            @csrf
+                            @method('DELETE')
+                            <button
+                                type="submit"
+                                class="btn btn-outline-danger btn-sm w-100">
+                                <i class="bi bi-trash"></i>
+                                Delete
+                            </button>
+                        </form>
 
                     </div>
 
@@ -447,10 +319,13 @@
 
             </div>
 
-        @endfor
+        @empty
+            <div class="text-center py-5 text-muted">
+                No games found.
+            </div>
+        @endforelse
     </div>
 
 </div>
-
 
 @endsection
